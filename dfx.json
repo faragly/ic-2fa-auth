@@ -1,0 +1,28 @@
+{
+  "canisters": {
+    "ic-2fa-auth-backend": {
+      "declarations": {
+        "node_compatibility": true
+      },
+      "main": "src/backend/main.mo",
+      "type": "motoko"
+    },
+    "ic-2fa-auth-frontend": {
+      "dependencies": ["ic-2fa-auth-backend"],
+      "source": ["dist/ic-2fa-auth/browser"],
+      "type": "assets"
+    },
+    "internet-identity": {
+      "type": "pull",
+      "id": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

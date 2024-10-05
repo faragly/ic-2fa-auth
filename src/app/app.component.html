@@ -1,0 +1,7 @@
+@if (authService.isAuthenticated()) {
+  <button type="button" (click)="authService.signOut()">Sign out</button>
+  {{ authService.principalId() }}
+} @else {
+  <button type="button" (click)="authService.signIn()">Sign in with Internet Identity</button>
+}
+<router-outlet />
