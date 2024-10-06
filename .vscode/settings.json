@@ -1,0 +1,8 @@
+{
+  "eslint.validate": ["javascript", "typescript", "html"],
+  "eslint.enable": true,
+  "editor.formatOnSave": true,
+  "[motoko]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

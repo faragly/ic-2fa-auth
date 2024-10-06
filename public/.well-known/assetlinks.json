@@ -4,9 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "$APP_BUNDLE_ID",
-      "sha256_cert_fingerprints": [
-        "$CERT_FINGERPRINT"
-      ]
+      "sha256_cert_fingerprints": ["$CERT_FINGERPRINT"]
     }
   }
 ]

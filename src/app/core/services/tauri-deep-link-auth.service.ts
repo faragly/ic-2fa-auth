@@ -1,76 +1,51 @@
-import {
-  DestroyRef,
-  Injectable,
-  computed,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { computed, DestroyRef, effect, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { AnonymousIdentity, SignIdentity } from '@dfinity/agent';
+import { AuthClient, AuthClientCreateOptions } from '@dfinity/auth-client';
 import {
   DelegationChain,
   DelegationIdentity,
   ECDSAKeyIdentity,
-  JsonnableDelegationChain,
   isDelegationValid,
+  JsonnableDelegationChain,
 } from '@dfinity/identity';
 import { open } from '@tauri-apps/plugin-shell';
-import { Buffer } from 'buffer';
-import {
-  filter,
-  from,
-  map,
-  repeat,
-  switchMap,
-  takeUntil,
-  timer,
-  connect as rxConnect,
-  mergeWith,
-} from 'rxjs';
 import { connect } from 'ngxtension/connect';
 import { filterNil } from 'ngxtension/filter-nil';
-import { AnonymousIdentity, SignIdentity } from '@dfinity/agent';
+import { filter, from, map, mergeWith, repeat, connect as rxConnect, switchMap, takeUntil, timer } from 'rxjs';
+import { Buffer } from 'buffer';
 import { isMatching, P } from 'ts-pattern';
-
-import { environment } from '@environments/environment';
 import { AuthClientLogoutOptions, IAuthService } from '@core/models/auth';
 import { onOpenUrlObservable } from '@core/operators';
 import { assertClient } from '@core/utils';
-import { AuthClient, AuthClientCreateOptions } from '@dfinity/auth-client';
+import { environment } from '@environments/environment';
 
-function assertDelegationIdentity(
-  identity: SignIdentity | AnonymousIdentity
-): asserts identity is SignIdentity {
-  if (!isMatching(P.instanceOf(SignIdentity), identity))
-    throw Error('The sign identity is not provided');
+function assertDelegationIdentity(identity: AnonymousIdentity | SignIdentity): asserts identity is SignIdentity {
+  if (!isMatching(P.instanceOf(SignIdentity), identity)) throw Error('The sign identity is not provided');
 }
 
-type State = {
+interface State {
   client: AuthClient | null;
-  identity: SignIdentity | AnonymousIdentity;
   delegationChain: DelegationChain | null;
+  identity: AnonymousIdentity | SignIdentity;
   isAuthenticated: boolean;
-};
+}
 
 const INITIAL_VALUE: State = {
   client: null,
-  identity: new AnonymousIdentity(),
   delegationChain: null,
+  identity: new AnonymousIdentity(),
   isAuthenticated: false,
 };
 
 @Injectable()
 export class TauriDeepLinkAuthService implements IAuthService {
-  #state = signal(INITIAL_VALUE);
   #destroyRef = inject(DestroyRef);
+  #state = signal(INITIAL_VALUE);
   client = computed(() => this.#state().client);
   isAuthenticated = computed(() => {
     const { delegationChain, isAuthenticated } = this.#state();
-    return (
-      delegationChain !== null &&
-      isDelegationValid(delegationChain) &&
-      isAuthenticated
-    );
+    return delegationChain !== null && isDelegationValid(delegationChain) && isAuthenticated;
   });
   principalId = computed(() => this.#state().identity.getPrincipal().toText());
 
@@ -85,25 +60,39 @@ export class TauriDeepLinkAuthService implements IAuthService {
     effect(() => console.info(`Principal ID: ${this.principalId()}`));
   }
 
+  #createIdentityFromDelegation(url: string) {
+    const { identity } = this.#state();
+
+    assertDelegationIdentity(identity);
+
+    // Get JSON from deep link query param
+    const encodedDelegationChain = url.replace(`${environment.scheme}://internetIdentityCallback?delegationChain=`, '');
+    const json: JsonnableDelegationChain = JSON.parse(decodeURIComponent(encodedDelegationChain));
+    const delegationChain: DelegationChain = DelegationChain.fromJSON(json);
+
+    // Here we create an identity with the delegation chain we received from the website
+    const internetIdentity = DelegationIdentity.fromDelegation(identity, delegationChain);
+    this.#state.update((state) => ({
+      ...state,
+      delegationChain,
+      identity: internetIdentity,
+      isAuthenticated: true,
+    }));
+  }
+
   #initDelegationChecker() {
-    const delegationChain$ = toObservable(this.#state).pipe(
-      map(({ delegationChain }) => delegationChain)
-    );
+    const delegationChain$ = toObservable(this.#state).pipe(map(({ delegationChain }) => delegationChain));
     const on$ = delegationChain$.pipe(filterNil());
     const off$ = delegationChain$.pipe(filter((v) => v === null));
     on$
       .pipe(
         switchMap((delegationChain) => {
-          const expirationTimeMs = Number(
-            delegationChain.delegations[0].delegation.expiration / 1000000n
-          );
-          return timer(expirationTimeMs - Date.now()).pipe(
-            filter(() => !isDelegationValid(delegationChain))
-          );
+          const expirationTimeMs = Number(delegationChain.delegations[0].delegation.expiration / 1000000n);
+          return timer(expirationTimeMs - Date.now()).pipe(filter(() => !isDelegationValid(delegationChain)));
         }),
         takeUntil(off$),
         repeat(),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.signOut();
@@ -115,7 +104,7 @@ export class TauriDeepLinkAuthService implements IAuthService {
       ECDSAKeyIdentity.generate({
         extractable: false,
         keyUsages: ['sign', 'verify'],
-      })
+      }),
     ).pipe(
       rxConnect((shared) =>
         shared.pipe(
@@ -128,54 +117,26 @@ export class TauriDeepLinkAuthService implements IAuthService {
                   identity,
                   // Idle checks aren't needed
                   idleOptions: {
-                    disableIdle: true,
                     disableDefaultIdleCallback: true,
+                    disableIdle: true,
                   },
                   // noop storage
                   storage: {
                     get: () => Promise.resolve(null),
-                    set: () => Promise.resolve(),
                     remove: () => Promise.resolve(),
+                    set: () => Promise.resolve(),
                   },
                 };
                 return AuthClient.create(options);
               }),
-              map((client) => ({ client }))
-            )
-          )
-        )
-      )
+              map((client) => ({ client })),
+            ),
+          ),
+        ),
+      ),
     );
 
     connect(this.#state, authClient$, this.#destroyRef);
-  }
-
-  #createIdentityFromDelegation(url: string) {
-    const { identity } = this.#state();
-
-    assertDelegationIdentity(identity);
-
-    // Get JSON from deep link query param
-    const encodedDelegationChain = url.replace(
-      `${environment.scheme}://internetIdentityCallback?delegationChain=`,
-      ''
-    );
-    const json: JsonnableDelegationChain = JSON.parse(
-      decodeURIComponent(encodedDelegationChain)
-    );
-    const delegationChain: DelegationChain = DelegationChain.fromJSON(json);
-
-    // Here we create an identity with the delegation chain we received from the website
-    const internetIdentity = DelegationIdentity.fromDelegation(
-      identity,
-      delegationChain
-    );
-    this.#state.update((state) => ({
-      ...state,
-      delegationChain,
-      identity: internetIdentity,
-      isAuthenticated: true,
-    }));
   }
 
   async signIn() {
@@ -183,9 +144,7 @@ export class TauriDeepLinkAuthService implements IAuthService {
 
     assertDelegationIdentity(identity);
 
-    const publicKey = Buffer.from(identity.getPublicKey().toDer()).toString(
-      'hex'
-    );
+    const publicKey = Buffer.from(identity.getPublicKey().toDer()).toString('hex');
     const url = `${environment.authUrl}?publicKey=${publicKey}`;
     // Here we open a browser and continue on the website
     await open(url);

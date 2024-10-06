@@ -3,18 +3,22 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
-      "type": "chrome",
-      "request": "launch",
-      "preLaunchTask": "npm: start",
-      "url": "http://localhost:4210/"
+      "command": "yarn tauri dev",
+      "name": "Run Tauri dev",
+      "type": "node-terminal",
+      "request": "launch"
     },
     {
-      "name": "test",
-      "type": "chrome",
+      "command": "dfx start",
+      "name": "Start dfx replica",
       "request": "launch",
-      "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "type": "node-terminal"
+    },
+    {
+      "command": "dfx deploy",
+      "name": "Deploy canisters",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }

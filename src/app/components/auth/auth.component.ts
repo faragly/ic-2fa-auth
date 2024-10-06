@@ -1,23 +1,14 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
-import {
-  AUTH_MAX_TIME_TO_LIVE,
-  IDENTITY_PROVIDER_DEFAULT,
-} from '@core/constants';
-import { AUTH_SERVICE } from '@core/tokens';
-import { createAuthClient } from '@core/utils';
-import {
-  DelegationChain,
-  DelegationIdentity,
-  ECDSAKeyIdentity,
-} from '@dfinity/identity';
-import { environment } from '@environments/environment';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { DelegationChain, DelegationIdentity, ECDSAKeyIdentity } from '@dfinity/identity';
+import { Principal } from '@dfinity/principal';
 import { injectQueryParams } from 'ngxtension/inject-query-params';
 import { Buffer } from 'buffer';
-import { Principal } from '@dfinity/principal';
+import { AUTH_MAX_TIME_TO_LIVE, IDENTITY_PROVIDER_DEFAULT } from '@core/constants';
+import { AUTH_SERVICE } from '@core/tokens';
+import { createAuthClient } from '@core/utils';
+import { environment } from '@environments/environment';
 
-function assertPublicKey(
-  publicKey: string | null
-): asserts publicKey is string {
+function assertPublicKey(publicKey: string | null): asserts publicKey is string {
   if (!publicKey) throw Error('The publicKey not provided');
 }
 
@@ -25,14 +16,15 @@ function getExpirationDate() {
   const date = new Date();
   date.setDate(date.getDate() + 7); // 7 days
   return date;
-};
+}
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [],
   selector: 'app-auth',
   standalone: true,
-  imports: [],
-  templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
+  templateUrl: './auth.component.html',
 })
 export class AuthComponent implements OnInit {
   authService = inject(AUTH_SERVICE);
@@ -50,22 +42,17 @@ export class AuthComponent implements OnInit {
       keyUsages: ['sign', 'verify'],
     });
     const client = await createAuthClient(delegationIdentity);
-    const identityUrl = environment.production
-      ? IDENTITY_PROVIDER_DEFAULT
-      : `http://${
-          import.meta.env.CANISTER_ID_INTERNET_IDENTITY
-        }.localhost:8080/`;
-    const delegationChain = await new Promise<DelegationChain>(
-      (resolve, reject) =>
-        client.login({
-          identityProvider: identityUrl,
-          maxTimeToLive: AUTH_MAX_TIME_TO_LIVE,
-          onSuccess: () =>
-            resolve(
-              (client.getIdentity() as DelegationIdentity).getDelegation()
-            ),
-          onError: reject,
-        })
+    const identityUrl =
+      environment.production && import.meta.env.DFX_NETWORK === 'ic'
+        ? IDENTITY_PROVIDER_DEFAULT
+        : `http://${import.meta.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:8080/`;
+    const delegationChain = await new Promise<DelegationChain>((resolve, reject) =>
+      client.login({
+        identityProvider: identityUrl,
+        maxTimeToLive: AUTH_MAX_TIME_TO_LIVE,
+        onError: reject,
+        onSuccess: () => resolve((client.getIdentity() as DelegationIdentity).getDelegation()),
+      }),
     );
     // Create delegation chain from II delegation chain for public key
     const delegationChainForPublicKey = await DelegationChain.create(
@@ -74,17 +61,11 @@ export class AuthComponent implements OnInit {
       getExpirationDate(),
       {
         previous: delegationChain,
-        targets: [
-          Principal.fromText(import.meta.env.CANISTER_ID_IC_2FA_AUTH_BACKEND),
-        ],
-      }
+        targets: [Principal.fromText(import.meta.env.CANISTER_ID_IC_2FA_AUTH_BACKEND)],
+      },
     );
     // Send above delegationChainForPublicKey back to Tauri
     const json = JSON.stringify(delegationChainForPublicKey.toJSON());
-    window.open(
-      `${
-        environment.scheme
-      }://internetIdentityCallback?delegationChain=${encodeURIComponent(json)}`
-    );
+    window.open(`${environment.scheme}://internetIdentityCallback?delegationChain=${encodeURIComponent(json)}`);
   }
 }
