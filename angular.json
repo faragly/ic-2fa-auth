@@ -62,7 +62,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.css"],
             "scripts": [],
             "allowedCommonJsDependencies": ["borc", "simple-cbor", "base64-arraybuffer", "buffer"],
             "ngxEnv": {

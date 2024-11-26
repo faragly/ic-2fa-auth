@@ -45,3 +45,5 @@ Thumbs.db
 .dfx
 deps
 .env
+
+.nx

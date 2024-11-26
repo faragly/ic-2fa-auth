@@ -62,7 +62,7 @@ export class AuthService implements IAuthService {
     const identityUrl =
       environment.production && import.meta.env.DFX_NETWORK === 'ic'
         ? IDENTITY_PROVIDER_DEFAULT
-        : `http://${import.meta.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:8080/`;
+        : `http://${import.meta.env.CANISTER_ID_INTERNET_IDENTITY}.localhost:4943/`;
 
     const { client } = this.#state();
 

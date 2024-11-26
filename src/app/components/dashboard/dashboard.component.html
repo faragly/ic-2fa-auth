@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h1>Welcome to Tauri + Angular!</h1>
   <div class="row">
     <a href="https://tauri.app" target="_blank">
@@ -15,4 +15,1090 @@
     <button type="submit">Greet</button>
   </form>
   <p>{{ greetingMessage }}</p>
+</div> -->
+
+<!-- <header class="flex items-center px-4">
+  <div class="py-2.5 lg:hidden">
+    <span class="relative"
+      ><button
+        aria-label="Open navigation"
+        class="cursor-default relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+        type="button"
+        data-headlessui-state="">
+        <span
+          class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+          aria-hidden="true"></span
+        ><svg data-slot="icon" viewBox="0 0 20 20" aria-hidden="true">
+          <path
+            d="M2 6.75C2 6.33579 2.33579 6 2.75 6H17.25C17.6642 6 18 6.33579 18 6.75C18 7.16421 17.6642 7.5 17.25 7.5H2.75C2.33579 7.5 2 7.16421 2 6.75ZM2 13.25C2 12.8358 2.33579 12.5 2.75 12.5H17.25C17.6642 12.5 18 12.8358 18 13.25C18 13.6642 17.6642 14 17.25 14H2.75C2.33579 14 2 13.6642 2 13.25Z"></path>
+        </svg></button
+    ></span>
+  </div>
+  <div class="min-w-0 flex-1">
+    <nav class="flex flex-1 items-center gap-4 py-2.5">
+      <span class="max-lg:hidden relative"
+        ><button
+          id="headlessui-menu-button-:R1pl7qkva:"
+          type="button"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-headlessui-state=""
+          class="cursor-default relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white">
+          <span
+            class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+            aria-hidden="true"></span
+          ><span
+            data-slot="avatar"
+            class="inline-grid shrink-0 align-middle [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1 outline outline-1 -outline-offset-1 outline-black/[--ring-opacity] dark:outline-white/[--ring-opacity] rounded-full *:rounded-full"
+            ><img class="size-full" src="/tailwind-logo.svg" alt="" /></span
+          ><span class="truncate">Tailwind Labs</span
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            aria-hidden="true"
+            data-slot="icon">
+            <path
+              fill-rule="evenodd"
+              d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+              clip-rule="evenodd"></path>
+          </svg></button
+      ></span>
+      <div aria-hidden="true" class="max-lg:hidden h-6 w-px bg-zinc-950/10 dark:bg-white/10"></div>
+      <div class="max-lg:hidden flex items-center gap-3">
+        <span class="relative"
+          ><span
+            class="absolute inset-x-2 -bottom-2.5 h-0.5 rounded-full bg-zinc-950 dark:bg-white"
+            style="transform: none; transform-origin: 50% 50% 0px"></span
+          ><a
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            
+            href="/demos/stacked"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            >Home</a
+          ></span
+        ><span class="relative"
+          ><a
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            
+            href="/demos/stacked/events"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            >Events</a
+          ></span
+        ><span class="relative"
+          ><a
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            data-headlessui-state=""
+            href="/demos/stacked/orders"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            >Orders</a
+          ></span
+        ><span class="relative"
+          ><a
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            data-headlessui-state=""
+            href="/demos/stacked/broadcasts"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            >Broadcasts</a
+          ></span
+        ><span class="relative"
+          ><a
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            data-headlessui-state=""
+            href="/demos/stacked/settings"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            >Settings</a
+          ></span
+        >
+      </div>
+      <div aria-hidden="true" class="-ml-4 flex-1"></div>
+      <div class="flex items-center gap-3">
+        <span class="relative"
+          ><a
+            aria-label="Search"
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            data-headlessui-state=""
+            href="#"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon">
+              <path
+                fill-rule="evenodd"
+                d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                clip-rule="evenodd"></path></svg></a></span
+        ><span class="relative"
+          ><a
+            aria-label="Inbox"
+            class="relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white"
+            data-headlessui-state=""
+            href="/demos/stacked/inbox"
+            ><span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon">
+              <path
+                fill-rule="evenodd"
+                d="M1 11.27c0-.246.033-.492.099-.73l1.523-5.521A2.75 2.75 0 0 1 5.273 3h9.454a2.75 2.75 0 0 1 2.651 2.019l1.523 5.52c.066.239.099.485.099.732V15a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3.73Zm3.068-5.852A1.25 1.25 0 0 1 5.273 4.5h9.454a1.25 1.25 0 0 1 1.205.918l1.523 5.52c.006.02.01.041.015.062H14a1 1 0 0 0-.86.49l-.606 1.02a1 1 0 0 1-.86.49H8.236a1 1 0 0 1-.894-.553l-.448-.894A1 1 0 0 0 6 11H2.53l.015-.062 1.523-5.52Z"
+                clip-rule="evenodd"></path></svg></a></span
+        ><span class="relative"
+          ><button
+            id="headlessui-menu-button-:Rftl7qkva:"
+            type="button"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            data-headlessui-state=""
+            class="cursor-default relative flex min-w-0 items-center gap-3 rounded-lg p-2 text-left text-base/6 font-medium text-zinc-950 sm:text-sm/5 data-[slot=icon]:*:size-6 data-[slot=icon]:*:shrink-0 data-[slot=icon]:*:fill-zinc-500 sm:data-[slot=icon]:*:size-5 data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:ml-auto data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-5 sm:data-[slot=icon]:last:[&amp;:not(:nth-child(2))]:*:size-4 data-[slot=avatar]:*:-m-0.5 data-[slot=avatar]:*:size-7 data-[slot=avatar]:*:[--avatar-radius:theme(borderRadius.DEFAULT)] data-[slot=avatar]:*:[--ring-opacity:10%] sm:data-[slot=avatar]:*:size-6 data-[hover]:bg-zinc-950/5 data-[slot=icon]:*:data-[hover]:fill-zinc-950 data-[active]:bg-zinc-950/5 data-[slot=icon]:*:data-[active]:fill-zinc-950 dark:text-white dark:data-[slot=icon]:*:fill-zinc-400 dark:data-[hover]:bg-white/5 dark:data-[slot=icon]:*:data-[hover]:fill-white dark:data-[active]:bg-white/5 dark:data-[slot=icon]:*:data-[active]:fill-white">
+            <span
+              class="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden"
+              aria-hidden="true"></span
+            ><span
+              data-slot="avatar"
+              class="inline-grid shrink-0 align-middle [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1 outline outline-1 -outline-offset-1 outline-black/[--ring-opacity] dark:outline-white/[--ring-opacity] rounded-[--avatar-radius] *:rounded-[--avatar-radius]"
+              ><img class="size-full" src="/profile-photo.jpg" alt=""
+            /></span></button
+        ></span>
+      </div>
+    </nav>
+  </div>
+</header> -->
+<!-- <main class="flex flex-1 flex-col pb-2 lg:px-2">
+  <div
+    class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-sm lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
+    <div class="mx-auto max-w-6xl">
+      <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Home</h1>
+      <hr role="presentation" class="mt-6 w-full border-t border-zinc-950/10 dark:border-white/10" />
+    </div>
+  </div>
+</main> -->
+
+<div class="relative flex min-h-screen flex-col bg-background">
+  <!-- <div class="border-b">
+    <div class="flex h-16 items-center px-4">
+      <button
+        class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 w-[200px] justify-between"
+        role="combobox"
+        aria-expanded="false"
+        aria-label="Select a team"
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="radix-:r4f:"
+        data-state="closed">
+        <span class="relative flex shrink-0 overflow-hidden rounded-full mr-2 h-5 w-5"
+          ><img
+            class="aspect-square h-full w-full grayscale"
+            alt="Alicia Koch"
+            src="https://avatar.vercel.sh/personal.png" /></span
+        >Alicia Koch<svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevrons-up-down ml-auto opacity-50">
+          <path d="m7 15 5 5 5-5"></path>
+          <path d="m7 9 5-5 5 5"></path>
+        </svg>
+      </button>
+      <nav class="flex items-center space-x-4 lg:space-x-6 mx-6">
+        <a class="text-sm font-medium transition-colors hover:text-primary" href="/examples/dashboard">Overview</a
+        ><a
+          class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          href="/examples/dashboard"
+          >Customers</a
+        ><a
+          class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          href="/examples/dashboard"
+          >Products</a
+        ><a
+          class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          href="/examples/dashboard"
+          >Settings</a
+        >
+      </nav>
+      <div class="ml-auto flex items-center space-x-4">
+        <div>
+          <input hlmInput placeholder="Search..." type="search" />
+        </div>
+        <button
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 w-8 rounded-full"
+          type="button"
+          id="radix-:r4g:"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          data-state="closed">
+          <span class="relative flex shrink-0 overflow-hidden rounded-full h-8 w-8"
+            ><img class="aspect-square h-full w-full" alt="@shadcn" src="/avatars/01.png"
+          /></span>
+        </button>
+      </div>
+    </div>
+  </div> -->
+  <header
+    class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">
+    <div class="flex h-14 items-center px-4">
+      <div class="mr-4 hidden md:flex">
+        <a class="mr-4 flex items-center gap-2 lg:mr-6" href="/"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6">
+            <rect width="256" height="256" fill="none"></rect>
+            <line
+              x1="208"
+              y1="128"
+              x2="128"
+              y2="208"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="32"></line>
+            <line
+              x1="192"
+              y1="40"
+              x2="40"
+              y2="192"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="32"></line></svg
+          ><span class="hidden font-bold lg:inline-block">shadcn/ui</span></a
+        >
+        <nav class="flex items-center gap-4 text-sm xl:gap-6">
+          <a class="transition-colors hover:text-foreground/80 text-foreground/80" href="/docs">Docs</a
+          ><a class="transition-colors hover:text-foreground/80 text-foreground/80" href="/docs/components"
+            >Components</a
+          ><a class="transition-colors hover:text-foreground/80 text-foreground/80" href="/blocks">Blocks</a
+          ><a class="transition-colors hover:text-foreground/80 text-foreground/80" href="/charts">Charts</a
+          ><a class="transition-colors hover:text-foreground/80 text-foreground/80" href="/themes">Themes</a
+          ><a class="transition-colors hover:text-foreground/80 text-foreground" href="/colors">Colors</a>
+        </nav>
+      </div>
+      <button
+        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground py-2 -ml-2 mr-2 h-8 w-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="radix-:R15u6ja:"
+        data-state="closed">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="!size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"></path></svg
+        ><span class="sr-only">Toggle Menu</span>
+      </button>
+      <div class="flex flex-1 items-center justify-between gap-2 md:justify-end">
+        <div class="w-full flex-1 md:w-auto md:flex-none">
+          <button
+            class="inline-flex items-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64">
+            <span class="hidden lg:inline-flex">Search documentation...</span
+            ><span class="inline-flex lg:hidden">Search...</span
+            ><kbd
+              class="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex"
+              ><span class="text-xs">⌘</span>K</kbd
+            >
+          </button>
+        </div>
+        <nav class="flex items-center gap-0.5">
+          <button
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 w-8 px-0">
+            <a target="_blank" rel="noreferrer" href="https://github.com/shadcn-ui/ui"
+              ><svg viewBox="0 0 438.549 438.549" class="h-4 w-4">
+                <path
+                  fill="currentColor"
+                  d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z"></path></svg
+              ><span class="sr-only">GitHub</span></a
+            >
+          </button>
+          <button hlmBtn variant="ghost">
+            <hlm-icon class="hidden [html.dark_&amp;]:block" size="sm" name="lucideSun" />
+            <hlm-icon class="hidden [html.light_&amp;]:block" size="sm" name="lucideMoon" />
+            <span class="sr-only">Toggle theme</span>
+          </button>
+          <button
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground py-2 group/toggle h-8 w-8 px-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-sun hidden [html.dark_&amp;]:block">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path></svg
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-moon hidden [html.light_&amp;]:block">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
+            ><span class="sr-only">Toggle theme</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div class="flex-1 space-y-4 p-8 pt-6">
+    <div class="flex items-center justify-between space-y-2">
+      <h2 class="text-3xl font-bold tracking-tight">Dashboard</h2>
+      <div class="flex items-center space-x-2">
+        <div class="grid gap-2">
+          <button
+            class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 w-[260px] justify-start text-left font-normal"
+            id="date"
+            type="button"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-controls="radix-:r4i:"
+            data-state="closed">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-calendar mr-2 h-4 w-4">
+              <path d="M8 2v4"></path>
+              <path d="M16 2v4"></path>
+              <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+              <path d="M3 10h18"></path></svg
+            >Jan 20, 2023 - Feb 09, 2023
+          </button>
+        </div>
+        <button
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+          Download
+        </button>
+      </div>
+    </div>
+    <div dir="ltr" data-orientation="horizontal" class="space-y-4">
+      <div
+        role="tablist"
+        aria-orientation="horizontal"
+        class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground"
+        tabindex="0"
+        data-orientation="horizontal"
+        style="outline: none">
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="radix-:r4j:-content-overview"
+          data-state="active"
+          id="radix-:r4j:-trigger-overview"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"
+          tabindex="0"
+          data-orientation="horizontal"
+          data-radix-collection-item="">
+          Overview</button
+        ><button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="radix-:r4j:-content-analytics"
+          data-state="inactive"
+          data-disabled=""
+          disabled=""
+          id="radix-:r4j:-trigger-analytics"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"
+          tabindex="-1"
+          data-orientation="horizontal"
+          data-radix-collection-item="">
+          Analytics</button
+        ><button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="radix-:r4j:-content-reports"
+          data-state="inactive"
+          data-disabled=""
+          disabled=""
+          id="radix-:r4j:-trigger-reports"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"
+          tabindex="-1"
+          data-orientation="horizontal"
+          data-radix-collection-item="">
+          Reports</button
+        ><button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="radix-:r4j:-content-notifications"
+          data-state="inactive"
+          data-disabled=""
+          disabled=""
+          id="radix-:r4j:-trigger-notifications"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"
+          tabindex="-1"
+          data-orientation="horizontal"
+          data-radix-collection-item="">
+          Notifications
+        </button>
+      </div>
+      <div
+        data-state="active"
+        data-orientation="horizontal"
+        role="tabpanel"
+        aria-labelledby="radix-:r4j:-trigger-overview"
+        id="radix-:r4j:-content-overview"
+        tabindex="0"
+        class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 space-y-4"
+        style="animation-duration: 0s">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border bg-card text-card-foreground shadow">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+              <div class="tracking-tight text-sm font-medium">Total Revenue</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="h-4 w-4 text-muted-foreground">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">$45,231.89</div>
+              <p class="text-xs text-muted-foreground">+20.1% from last month</p>
+            </div>
+          </div>
+          <div class="rounded-xl border bg-card text-card-foreground shadow">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+              <div class="tracking-tight text-sm font-medium">Subscriptions</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="h-4 w-4 text-muted-foreground">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">+2350</div>
+              <p class="text-xs text-muted-foreground">+180.1% from last month</p>
+            </div>
+          </div>
+          <div class="rounded-xl border bg-card text-card-foreground shadow">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+              <div class="tracking-tight text-sm font-medium">Sales</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="h-4 w-4 text-muted-foreground">
+                <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                <path d="M2 10h20"></path>
+              </svg>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">+12,234</div>
+              <p class="text-xs text-muted-foreground">+19% from last month</p>
+            </div>
+          </div>
+          <div class="rounded-xl border bg-card text-card-foreground shadow">
+            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+              <div class="tracking-tight text-sm font-medium">Active Now</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="h-4 w-4 text-muted-foreground">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">+573</div>
+              <p class="text-xs text-muted-foreground">+201 since last hour</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+          <div class="rounded-xl border bg-card text-card-foreground shadow col-span-4">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="font-semibold leading-none tracking-tight">Overview</div>
+            </div>
+            <div class="p-6 pt-0 pl-2">
+              <div class="recharts-responsive-container" style="width: 100%; height: 350px; min-width: 0px">
+                <div
+                  class="recharts-wrapper"
+                  style="
+                    position: relative;
+                    cursor: default;
+                    width: 100%;
+                    height: 100%;
+                    max-height: 350px;
+                    max-width: 478px;
+                  ">
+                  <svg
+                    class="recharts-surface"
+                    width="478"
+                    height="350"
+                    viewBox="0 0 478 350"
+                    style="width: 100%; height: 100%">
+                    <title></title>
+                    <desc></desc>
+                    <defs>
+                      <clipPath id="recharts7-clip"><rect x="65" y="5" height="310" width="408"></rect></clipPath>
+                    </defs>
+                    <g class="recharts-layer recharts-cartesian-axis recharts-xAxis xAxis">
+                      <g class="recharts-cartesian-axis-ticks">
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="82"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="82" dy="0.71em">Jan</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="116"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="116" dy="0.71em">Feb</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="150"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="150" dy="0.71em">Mar</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="184"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="184" dy="0.71em">Apr</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="218"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="218" dy="0.71em">May</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="252"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="252" dy="0.71em">Jun</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="286"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="286" dy="0.71em">Jul</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="320"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="320" dy="0.71em">Aug</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="354"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="354" dy="0.71em">Sep</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="388"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="388" dy="0.71em">Oct</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="422"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="422" dy="0.71em">Nov</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="bottom"
+                            width="408"
+                            height="30"
+                            x="456"
+                            y="323"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="middle"
+                            fill="#888888">
+                            <tspan x="456" dy="0.71em">Dec</tspan>
+                          </text>
+                        </g>
+                      </g>
+                    </g>
+                    <g class="recharts-layer recharts-cartesian-axis recharts-yAxis yAxis">
+                      <g class="recharts-cartesian-axis-ticks">
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="left"
+                            width="60"
+                            height="310"
+                            x="57"
+                            y="315"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="end"
+                            fill="#888888">
+                            <tspan x="57" dy="0.355em">$0</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="left"
+                            width="60"
+                            height="310"
+                            x="57"
+                            y="237.5"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="end"
+                            fill="#888888">
+                            <tspan x="57" dy="0.355em">$1500</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="left"
+                            width="60"
+                            height="310"
+                            x="57"
+                            y="160"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="end"
+                            fill="#888888">
+                            <tspan x="57" dy="0.355em">$3000</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="left"
+                            width="60"
+                            height="310"
+                            x="57"
+                            y="82.5"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="end"
+                            fill="#888888">
+                            <tspan x="57" dy="0.355em">$4500</tspan>
+                          </text>
+                        </g>
+                        <g class="recharts-layer recharts-cartesian-axis-tick">
+                          <text
+                            stroke="none"
+                            font-size="12"
+                            orientation="left"
+                            width="60"
+                            height="310"
+                            x="57"
+                            y="9"
+                            class="recharts-text recharts-cartesian-axis-tick-value"
+                            text-anchor="end"
+                            fill="#888888">
+                            <tspan x="57" dy="0.355em">$6000</tspan>
+                          </text>
+                        </g>
+                      </g>
+                    </g>
+                    <g class="recharts-layer recharts-bar fill-primary">
+                      <g class="recharts-layer recharts-bar-rectangles">
+                        <g class="recharts-layer">
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="68.4"
+                              y="213.52666666666667"
+                              width="27"
+                              height="101.47333333333333"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Jan"
+                              d="M68.4,217.52666666666667A 4,4,0,0,1,72.4,213.52666666666667L 91.4,213.52666666666667A 4,4,0,0,1,
+        95.4,217.52666666666667L 95.4,315L 68.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="102.4"
+                              y="244.68166666666667"
+                              width="27"
+                              height="70.31833333333333"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Feb"
+                              d="M102.4,248.68166666666667A 4,4,0,0,1,106.4,244.68166666666667L 125.4,244.68166666666667A 4,4,0,0,1,
+        129.4,248.68166666666667L 129.4,315L 102.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="136.4"
+                              y="125.9"
+                              width="27"
+                              height="189.1"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Mar"
+                              d="M136.4,129.9A 4,4,0,0,1,140.4,125.9L 159.4,125.9A 4,4,0,0,1,
+        163.4,129.9L 163.4,315L 136.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="170.4"
+                              y="76.55833333333334"
+                              width="27"
+                              height="238.44166666666666"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Apr"
+                              d="M170.4,80.55833333333334A 4,4,0,0,1,174.4,76.55833333333334L 193.4,76.55833333333334A 4,4,0,0,1,
+        197.4,80.55833333333334L 197.4,315L 170.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="204.4"
+                              y="170.84999999999997"
+                              width="27"
+                              height="144.15000000000003"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="May"
+                              d="M204.4,174.84999999999997A 4,4,0,0,1,208.4,170.84999999999997L 227.4,170.84999999999997A 4,4,0,0,1,
+        231.4,174.84999999999997L 231.4,315L 204.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="238.4"
+                              y="179.89166666666668"
+                              width="27"
+                              height="135.10833333333332"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Jun"
+                              d="M238.4,183.89166666666668A 4,4,0,0,1,242.4,179.89166666666668L 261.4,179.89166666666668A 4,4,0,0,1,
+        265.4,183.89166666666668L 265.4,315L 238.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="272.4"
+                              y="211.15000000000003"
+                              width="27"
+                              height="103.84999999999997"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Jul"
+                              d="M272.4,215.15000000000003A 4,4,0,0,1,276.4,211.15000000000003L 295.4,211.15000000000003A 4,4,0,0,1,
+        299.4,215.15000000000003L 299.4,315L 272.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="306.4"
+                              y="257.59833333333336"
+                              width="27"
+                              height="57.40166666666664"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Aug"
+                              d="M306.4,261.59833333333336A 4,4,0,0,1,310.4,257.59833333333336L 329.4,257.59833333333336A 4,4,0,0,1,
+        333.4,261.59833333333336L 333.4,315L 306.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="340.4"
+                              y="177.46333333333334"
+                              width="27"
+                              height="137.53666666666666"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Sep"
+                              d="M340.4,181.46333333333334A 4,4,0,0,1,344.4,177.46333333333334L 363.4,177.46333333333334A 4,4,0,0,1,
+        367.4,181.46333333333334L 367.4,315L 340.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="374.4"
+                              y="56.40833333333335"
+                              width="27"
+                              height="258.59166666666664"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Oct"
+                              d="M374.4,60.40833333333335A 4,4,0,0,1,378.4,56.40833333333335L 397.4,56.40833333333335A 4,4,0,0,1,
+        401.4,60.40833333333335L 401.4,315L 374.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="408.4"
+                              y="104.19999999999999"
+                              width="27"
+                              height="210.8"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Nov"
+                              d="M408.4,108.19999999999999A 4,4,0,0,1,412.4,104.19999999999999L 431.4,104.19999999999999A 4,4,0,0,1,
+        435.4,108.19999999999999L 435.4,315L 408.4,315Z"></path>
+                          </g>
+                          <g class="recharts-layer recharts-bar-rectangle">
+                            <path
+                              x="442.4"
+                              y="242.30500000000004"
+                              width="27"
+                              height="72.69499999999996"
+                              radius="4,4,0,0"
+                              fill="currentColor"
+                              class="recharts-rectangle fill-primary"
+                              name="Dec"
+                              d="M442.4,246.30500000000004A 4,4,0,0,1,446.4,242.30500000000004L 465.4,242.30500000000004A 4,4,0,0,1,
+        469.4,246.30500000000004L 469.4,315L 442.4,315Z"></path>
+                          </g>
+                        </g>
+                      </g>
+                      <g class="recharts-layer"></g>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-xl border bg-card text-card-foreground shadow col-span-3">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="font-semibold leading-none tracking-tight">Recent Sales</div>
+              <div class="text-sm text-muted-foreground">You made 265 sales this month.</div>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="space-y-8">
+                <div class="flex items-center">
+                  <span class="relative flex shrink-0 overflow-hidden rounded-full h-9 w-9"
+                    ><img class="aspect-square h-full w-full" alt="Avatar" src="/avatars/01.png"
+                  /></span>
+                  <div class="ml-4 space-y-1">
+                    <p class="text-sm font-medium leading-none">Olivia Martin</p>
+                    <p class="text-sm text-muted-foreground">olivia.martinemail.com</p>
+                  </div>
+                  <div class="ml-auto font-medium">+$1,999.00</div>
+                </div>
+                <div class="flex items-center">
+                  <span
+                    class="relative shrink-0 overflow-hidden rounded-full flex h-9 w-9 items-center justify-center space-y-0 border"
+                    ><img class="aspect-square h-full w-full" alt="Avatar" src="/avatars/02.png"
+                  /></span>
+                  <div class="ml-4 space-y-1">
+                    <p class="text-sm font-medium leading-none">Jackson Lee</p>
+                    <p class="text-sm text-muted-foreground">jackson.leeemail.com</p>
+                  </div>
+                  <div class="ml-auto font-medium">+$39.00</div>
+                </div>
+                <div class="flex items-center">
+                  <span class="relative flex shrink-0 overflow-hidden rounded-full h-9 w-9"
+                    ><img class="aspect-square h-full w-full" alt="Avatar" src="/avatars/03.png"
+                  /></span>
+                  <div class="ml-4 space-y-1">
+                    <p class="text-sm font-medium leading-none">Isabella Nguyen</p>
+                    <p class="text-sm text-muted-foreground">isabella.nguyenemail.com</p>
+                  </div>
+                  <div class="ml-auto font-medium">+$299.00</div>
+                </div>
+                <div class="flex items-center">
+                  <span class="relative flex shrink-0 overflow-hidden rounded-full h-9 w-9"
+                    ><img class="aspect-square h-full w-full" alt="Avatar" src="/avatars/04.png"
+                  /></span>
+                  <div class="ml-4 space-y-1">
+                    <p class="text-sm font-medium leading-none">William Kim</p>
+                    <p class="text-sm text-muted-foreground">willemail.com</p>
+                  </div>
+                  <div class="ml-auto font-medium">+$99.00</div>
+                </div>
+                <div class="flex items-center">
+                  <span class="relative flex shrink-0 overflow-hidden rounded-full h-9 w-9"
+                    ><img class="aspect-square h-full w-full" alt="Avatar" src="/avatars/05.png"
+                  /></span>
+                  <div class="ml-4 space-y-1">
+                    <p class="text-sm font-medium leading-none">Sofia Davis</p>
+                    <p class="text-sm text-muted-foreground">sofia.davisemail.com</p>
+                  </div>
+                  <div class="ml-auto font-medium">+$39.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
