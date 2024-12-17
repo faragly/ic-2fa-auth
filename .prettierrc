@@ -28,5 +28,5 @@
       }
     }
   ],
-  "plugins": ["prettier-plugin-motoko"]
+  "plugins": ["prettier-plugin-motoko", "prettier-plugin-tailwindcss"]
 }

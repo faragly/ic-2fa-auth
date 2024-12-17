@@ -11,9 +11,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
           "changeDetection": "OnPush",
-          "standalone": true,
           "skipTests": true,
           "skipImport": true
         },
@@ -22,7 +20,6 @@
         },
         "@schematics/angular:directive": {
           "skipTests": true,
-          "standalone": true,
           "skipImport": true
         },
         "@schematics/angular:guard": {
@@ -33,7 +30,6 @@
         },
         "@schematics/angular:pipe": {
           "skipTests": true,
-          "standalone": true,
           "skipImport": true
         },
         "@schematics/angular:resolver": {
@@ -55,7 +51,6 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",

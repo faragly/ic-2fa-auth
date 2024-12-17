@@ -1,19 +1,18 @@
-import { Component, type Signal, computed, contentChild, contentChildren, effect } from '@angular/core';
-
-import { BrnFormFieldControl } from '@spartan-ng/ui-formfield-brain';
+import { Component, computed, contentChild, contentChildren, effect } from '@angular/core';
+import { BrnFormFieldControl } from '@spartan-ng/brain/form-field';
 import { HlmErrorDirective } from './hlm-error.directive';
 
 @Component({
 	selector: 'hlm-form-field',
 	template: `
-		<ng-content></ng-content>
+		<ng-content />
 
 		@switch (hasDisplayedMessage()) {
 			@case ('error') {
-				<ng-content select="hlm-error"></ng-content>
+				<ng-content select="hlm-error" />
 			}
 			@default {
-				<ng-content select="hlm-hint"></ng-content>
+				<ng-content select="hlm-hint" />
 			}
 		}
 	`,
@@ -23,13 +22,13 @@ import { HlmErrorDirective } from './hlm-error.directive';
 	},
 })
 export class HlmFormFieldComponent {
-	control = contentChild(BrnFormFieldControl);
+	protected readonly hasDisplayedMessage = computed<'error' | 'hint'>(() =>
+		this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint',
+	);
 
-	errorChildren = contentChildren(HlmErrorDirective);
+	public readonly control = contentChild(BrnFormFieldControl);
 
-	hasDisplayedMessage: Signal<'error' | 'hint'> = computed(() => {
-		return this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint';
-	});
+	public readonly errorChildren = contentChildren(HlmErrorDirective);
 
 	constructor() {
 		effect(() => {

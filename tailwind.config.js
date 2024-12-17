@@ -5,7 +5,8 @@ import tailwindcssTypography from '@tailwindcss/typography';
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [spartanNgPrest],
-  content: ['./src/**/*.{html,ts}'],
+  content: ['./src/app/**/*.{html,ts}', './src/libs/**/*.{html,ts}', './src/index.html'],
+  safelist: [{ pattern: /\:host/ }],
   theme: {
     extend: {
       backgroundImage: {

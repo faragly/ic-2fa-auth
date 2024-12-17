@@ -1,20 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { invoke } from '@tauri-apps/api/core';
-import { lucideMoon, lucideSun } from '@ng-icons/lucide';
+import { lucideFingerprint, lucideGithub, lucideMoon, lucidePlus, lucideSun } from '@ng-icons/lucide';
+import { environment } from '@environments/environment';
+import { SecretListComponent } from '../secret-list/secret-list.component';
+import { UserMenuComponent } from '../user-menu/user-menu.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmInputDirective, HlmIconComponent, HlmButtonDirective],
-  providers: [provideIcons({ lucideMoon, lucideSun })],
+  imports: [HlmInputDirective, HlmIconComponent, HlmButtonDirective, SecretListComponent, UserMenuComponent],
+  providers: [provideIcons({ lucideMoon, lucideSun, lucideFingerprint, lucideGithub, lucidePlus })],
   selector: 'app-dashboard',
-  standalone: true,
-  styleUrl: './dashboard.component.scss',
+  styleUrl: './dashboard.component.css',
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
+  readonly appName = environment.appName;
   greetingMessage = '';
 
   greet(event: SubmitEvent, name: string): void {

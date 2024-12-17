@@ -1,6 +1,6 @@
-import { Directive, computed, input } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { hlm } from '@spartan-ng/ui-core';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
 export const inputErrorVariants = cva('text-destructive text-sm font-medium', {
@@ -17,6 +17,6 @@ export type InputErrorVariants = VariantProps<typeof inputErrorVariants>;
 	},
 })
 export class HlmInputErrorDirective {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() => hlm(inputErrorVariants(), this.userClass()));
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 }

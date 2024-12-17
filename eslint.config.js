@@ -36,9 +36,9 @@ module.exports = tseslint.config(
           style: 'kebab-case',
         },
       ],
-      '@angular-eslint/prefer-standalone': ['warn'],
       '@angular-eslint/prefer-on-push-component-change-detection': ['warn'],
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      '@angular-eslint/no-input-rename': ['error', { allowedNames: ['class'] }],
       'perfectionist/sort-imports': [
         'warn',
         {

@@ -1,0 +1,3 @@
+:host {
+  @apply relative grid h-dvh w-full place-items-center overflow-hidden before:absolute before:start-1/2 before:top-0 before:-z-[1] before:size-full before:-translate-x-1/2 before:transform before:bg-squared before:bg-center before:bg-no-repeat dark:before:bg-squared-dark;
+}
