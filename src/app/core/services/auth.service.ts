@@ -25,6 +25,7 @@ export class AuthService implements IAuthService {
   #destroyRef = inject(DestroyRef);
   #refresh = new Subject<void>();
   #state = signal(INITIAL_VALUE);
+  identity = computed(() => this.#state().identity);
   isAuthenticated = computed(() => this.#state().isAuthenticated);
   principalId = computed(() => this.#state().identity.getPrincipal().toText());
 

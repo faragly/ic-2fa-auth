@@ -4,13 +4,12 @@ const angular = require('angular-eslint');
 const eslintConfigPrettier = require('eslint-config-prettier');
 const eslintPluginJsonc = require('eslint-plugin-jsonc');
 const jsoncParser = require('jsonc-eslint-parser');
-// const eslintPluginPrettierRecommended = require("eslint-plugin-prettier/recommended");
 const perfectionist = require('eslint-plugin-perfectionist');
 
 module.exports = tseslint.config(
   {
     files: ['**/*.ts'],
-    ignores: ['**/*.d.ts'],
+    ignores: ['**/*.d.ts', 'src/libs/**/*.ts'],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
@@ -46,7 +45,7 @@ module.exports = tseslint.config(
           order: 'asc',
           ignoreCase: true,
           matcher: 'minimatch',
-          internalPattern: ['~/**', '@spartan-ng/ui-*', '@core/**', '@environments/*'],
+          internalPattern: ['~/**', '@spartan-ng/ui-*', '@core/**', '@declarations/**', '@environments/*'],
           newlinesBetween: 'never',
           maxLineLength: undefined,
           groups: [
@@ -75,7 +74,7 @@ module.exports = tseslint.config(
               angular: '@angular/**',
               dfinity: '@dfinity/**',
               tauri: '@tauri-apps/**',
-              rxjs: ['rxjs', 'ngxtension/*'],
+              rxjs: ['rxjs', 'rxjs/*', 'ngxtension/*'],
               spartan: ['@spartan-ng/*', 'clsx', 'class-variance-authority'],
             },
           },

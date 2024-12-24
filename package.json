@@ -26,13 +26,13 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
-    "@dfinity/agent": "^2.1.2",
-    "@dfinity/auth-client": "^2.1.2",
-    "@dfinity/candid": "^2.1.2",
-    "@dfinity/identity": "^2.1.2",
-    "@dfinity/identity-secp256k1": "^2.1.2",
-    "@dfinity/principal": "^2.1.2",
-    "@dfinity/utils": "^2.5.1",
+    "@dfinity/agent": "^2.2.0",
+    "@dfinity/auth-client": "^2.2.0",
+    "@dfinity/candid": "^2.2.0",
+    "@dfinity/identity": "^2.2.0",
+    "@dfinity/identity-secp256k1": "^2.2.0",
+    "@dfinity/principal": "^2.2.0",
+    "@dfinity/utils": "^2.7.1",
     "@ng-icons/core": "^29.10.0",
     "@ng-icons/lucide": "^29.9.0",
     "@spartan-ng/brain": "0.0.1-alpha.380",
@@ -44,6 +44,7 @@
     "@spartan-ng/ui-menu-brain": "^0.0.1-alpha.374",
     "@spartan-ng/ui-popover-brain": "^0.0.1-alpha.374",
     "@spartan-ng/ui-progress-brain": "^0.0.1-alpha.374",
+    "@spartan-ng/ui-select-brain": "^0.0.1-alpha.374",
     "@spartan-ng/ui-separator-brain": "^0.0.1-alpha.374",
     "@tailwindcss/typography": "^0.5.15",
     "@tauri-apps/api": "^2.0.1",
@@ -54,8 +55,8 @@
     "clsx": "^2.1.1",
     "embla-carousel-angular": "^14.0.0",
     "ngx-scrollbar": "^13.0.1",
-    "ngx-sonner": "^2.0.0",
-    "ngxtension": "^4.1.0",
+    "ngx-sonner": "^3.0.0",
+    "ngxtension": "^4.2.0",
     "rxjs": "~7.8.0",
     "ts-pattern": "^5.4.0",
     "tslib": "^2.3.0",
@@ -70,6 +71,8 @@
     "@ngx-env/builder": "^19.0.1",
     "@spartan-ng/cli": "^0.0.1-alpha.380",
     "@tauri-apps/cli": "^2.0.1",
+    "@testing-library/angular": "^17.3.5",
+    "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "angular-eslint": "18.4.2",
     "autoprefixer": "^10.4.20",
@@ -113,6 +116,9 @@
       "@spartan-ng/ui-core": "$@spartan-ng/ui-core"
     },
     "@spartan-ng/ui-dialog-brain": {
+      "@spartan-ng/ui-core": "$@spartan-ng/ui-core"
+    },
+    "@spartan-ng/ui-select-brain": {
       "@spartan-ng/ui-core": "$@spartan-ng/ui-core"
     }
   }

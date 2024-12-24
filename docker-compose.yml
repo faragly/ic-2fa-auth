@@ -1,0 +1,20 @@
+name: "ic-2fa-auth"
+
+services:
+  backend:
+    image: ghcr.io/dfinity/icp-dev-env-slim:latest
+    platform: linux/amd64
+    working_dir: /app
+    volumes:
+      - ./networks.json:/root/.config/dfx/networks.json
+      - ./:/app:rw
+    environment:
+      - DFX_DEV_IDENTITY=${DFX_DEV_IDENTITY:-ic2fa}
+    entrypoint: ['sh', '-c', 'scripts/install.sh']
+    healthcheck: 
+      test: ['CMD', 'dfx', 'ping']
+      interval: 15s
+      timeout: 1m
+    tty: true
+    ports:
+      - 4943:4943

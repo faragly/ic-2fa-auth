@@ -1,0 +1,50 @@
+type Time = int;
+type SecretUpdate = 
+ record {
+   id: ID;
+   name: text;
+   otpType: variant {
+              hotp;
+              totp;
+            };
+   secretKey: text;
+ };
+type SecretCreate = 
+ record {
+   name: text;
+   otpType: variant {
+              hotp;
+              totp;
+            };
+   secretKey: text;
+ };
+type Secret = 
+ record {
+   createdAt: Time;
+   id: ID;
+   name: text;
+   otpType: variant {
+              hotp;
+              totp;
+            };
+   secretKey: text;
+   updatedAt: Time;
+ };
+type Result_1 = 
+ variant {
+   err: variant {alreadyExists: ID__1;};
+   ok;
+ };
+type Result = 
+ variant {
+   err: variant {notFound;};
+   ok;
+ };
+type ID__1 = text;
+type ID = text;
+service : {
+  create: (SecretCreate) -> (Result_1);
+  delete: (ID__1) -> (Result);
+  list: () -> (vec Secret) query;
+  update: (SecretUpdate) -> (Result);
+}

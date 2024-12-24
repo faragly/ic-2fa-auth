@@ -3,6 +3,10 @@
   "eslint.enable": true,
   "editor.formatOnSave": true,
   "[motoko]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dfinity-foundation.vscode-motoko",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
   }
 }

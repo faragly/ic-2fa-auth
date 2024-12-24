@@ -1,0 +1,5 @@
+[dependencies]
+base = "0.13.3"
+map = "9.0.1"
+uuid = "1.0.0"
+matchers = "https://github.com/kritzcreek/motoko-matchers#master@3dac8a071b69e4e651b25a7d9683fe831eb7cffd"

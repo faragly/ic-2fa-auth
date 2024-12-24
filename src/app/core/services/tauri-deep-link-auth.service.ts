@@ -43,6 +43,7 @@ export class TauriDeepLinkAuthService implements IAuthService {
   #destroyRef = inject(DestroyRef);
   #state = signal(INITIAL_VALUE);
   client = computed(() => this.#state().client);
+  identity = computed(() => this.#state().identity);
   isAuthenticated = computed(() => {
     const { delegationChain, isAuthenticated } = this.#state();
     return delegationChain !== null && isDelegationValid(delegationChain) && isAuthenticated;

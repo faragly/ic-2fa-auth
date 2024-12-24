@@ -45,5 +45,7 @@ Thumbs.db
 .dfx
 deps
 .env
+.mops
 
 .nx
+replica.log

@@ -1,7 +1,9 @@
 import { Signal } from '@angular/core';
+import { Identity } from '@dfinity/agent';
 import { AuthClient } from '@dfinity/auth-client';
 
 export interface IAuthService {
+  identity: Signal<Identity>;
   isAuthenticated: Signal<boolean>;
   principalId: Signal<string>;
   signIn(): Promise<void> | void;
