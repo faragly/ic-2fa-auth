@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { Secret } from '@core/models/secrets';
+import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
+import { SecretsService } from '@core/services/secrets.service';
+import { Secret } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
 import { EmptyComponent } from '../empty/empty.component';
 import { SecretItemComponent } from '../secret-item/secret-item.component';
 
@@ -11,5 +12,6 @@ import { SecretItemComponent } from '../secret-item/secret-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecretListComponent {
-  items: WritableSignal<Secret[]> = signal([]);
+  #secretsService = inject(SecretsService);
+  items: Signal<Secret[]> = computed(() => this.#secretsService.state().data);
 }

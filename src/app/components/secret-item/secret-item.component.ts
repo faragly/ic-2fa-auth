@@ -20,8 +20,18 @@ import { HlmMutedDirective } from '@spartan-ng/ui-typography-helm';
 import { lucideClipboard, lucideEllipsis, lucidePen, lucideTrash, lucideView } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/brain/progress';
-import { Secret } from '@core/models/secrets';
+import { fromTimestamp } from '@core/utils';
+import { Secret as SecretRaw } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
 import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard.component';
+
+interface Secret {
+  createdAt: Date;
+  id: string;
+  name: string;
+  otpType: 'hotp' | 'totp';
+  secretKey: string;
+  updatedAt: Date;
+}
 
 @Component({
   selector: 'app-secret-item',
@@ -56,5 +66,12 @@ import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecretItemComponent {
-  data = input.required<Secret>();
+  data = input.required<Secret, SecretRaw>({
+    transform: (value: SecretRaw): Secret => ({
+      ...value,
+      otpType: Object.keys(value.otpType)[0] as Secret['otpType'],
+      createdAt: fromTimestamp(value.createdAt),
+      updatedAt: fromTimestamp(value.updatedAt),
+    }),
+  });
 }
