@@ -1,0 +1,47 @@
+<hlm-dialog-header>
+  <h3 hlmDialogTitle>{{ isEdit ? 'Edit' : 'Create' }} Secret</h3>
+</hlm-dialog-header>
+<form [formGroup]="form" id="addSecretForm" class="grid gap-4" (ngSubmit)="handleSubmit()">
+  <hlm-form-field>
+    <label hlmLabel>
+      Account name
+      <input class="w-full" hlmInput formControlName="name" />
+    </label>
+  </hlm-form-field>
+  <hlm-form-field>
+    <label hlmLabel>
+      Secret key
+      <input class="w-full" hlmInput formControlName="secretKey" />
+    </label>
+  </hlm-form-field>
+  <brn-select id="otpType" placeholder="Select OTP type" formControlName="otpType">
+    <label hlmLabel for="otpType">Type</label>
+    <hlm-select-trigger class="my-1 w-full">
+      <hlm-select-value value="totp" />
+    </hlm-select-trigger>
+    <hlm-select-content>
+      @for (option of otpOptions; track option.value) {
+        <hlm-option [value]="option.value" [disabled]="option.disabled">{{ option.label }}</hlm-option>
+      }
+    </hlm-select-content>
+  </brn-select>
+</form>
+<hlm-dialog-footer>
+  <button hlmBtn variant="ghost" (click)="close()">Cancel</button>
+  @if (loading()) {
+    <ng-container [ngTemplateOutlet]="loadingButton" />
+  } @else {
+    <button hlmBtn type="submit" form="addSecretForm" [disabled]="form.invalid">
+      @if (isEdit) {
+        <hlm-icon size="sm" class="mr-2" name="lucideSave" /> Save
+      } @else {
+        <hlm-icon size="sm" class="mr-2" name="lucidePlus" /> Create
+      }
+    </button>
+  }
+</hlm-dialog-footer>
+<ng-template #loadingButton>
+  <button disabled hlmBtn>
+    <hlm-icon name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" /> {{ isEdit ? 'Saving' : 'Creating' }}
+  </button>
+</ng-template>

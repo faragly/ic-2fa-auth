@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
@@ -8,6 +9,7 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
+import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import {
   HlmMenuComponent,
@@ -20,9 +22,11 @@ import { HlmMutedDirective } from '@spartan-ng/ui-typography-helm';
 import { lucideClipboard, lucideEllipsis, lucidePen, lucideTrash, lucideView } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/brain/progress';
+import { SecretsService } from '@core/services/secrets.service';
 import { fromTimestamp } from '@core/utils';
-import { Secret as SecretRaw } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
+import { Secret as SecretRaw, SecretUpdate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
 import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard.component';
+import { DialogContext, EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 interface Secret {
   createdAt: Date;
@@ -66,12 +70,38 @@ interface Secret {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecretItemComponent {
-  data = input.required<Secret, SecretRaw>({
-    transform: (value: SecretRaw): Secret => ({
-      ...value,
-      otpType: Object.keys(value.otpType)[0] as Secret['otpType'],
-      createdAt: fromTimestamp(value.createdAt),
-      updatedAt: fromTimestamp(value.updatedAt),
-    }),
+  #destroyRef = inject(DestroyRef);
+  #hlmDialogService = inject(HlmDialogService);
+  #secretsService = inject(SecretsService);
+  data = computed(() => {
+    const data = this.dataRaw();
+    return {
+      ...data,
+      otpType: Object.keys(data.otpType)[0] as Secret['otpType'],
+      createdAt: fromTimestamp(data.createdAt),
+      updatedAt: fromTimestamp(data.updatedAt),
+    } satisfies Secret;
   });
+  dataRaw = input.required<SecretRaw>();
+
+  openEditDialog() {
+    const dialogRef = this.#hlmDialogService.open(EditDialogComponent, {
+      context: {
+        isEdit: true,
+        action: (payload: SecretUpdate) => this.#secretsService.update(payload),
+        messages: {
+          loading: 'Updating the secret...',
+          success: 'The secret has been successfully updated.',
+        },
+        data: this.dataRaw(),
+      } satisfies DialogContext,
+      contentClass: 'min-w-[400px] sm:max-w-[600px]',
+    });
+
+    dialogRef.closed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => {
+      if (result) {
+        this.#secretsService.refresh();
+      }
+    });
+  }
 }

@@ -13,6 +13,7 @@ import {
   ID,
   Secret,
   SecretCreate,
+  SecretUpdate,
 } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
 
 export type ExtractObservable<P> = P extends Observable<infer T> ? T : never;
@@ -96,5 +97,28 @@ export class SecretsService {
 
   refresh() {
     this.#refresh.next();
+  }
+
+  update(payload: SecretUpdate) {
+    this.#state.update((state) => ({
+      ...state,
+      loading: { ...state.loading, update: [...state.loading.update, payload.id] },
+    }));
+    return this.actor$.pipe(
+      switchMap((actor) => actor.update(payload)),
+      switchMap((result) =>
+        match(result)
+          .with({ err: { notFound: P.nullish } }, () =>
+            throwError(() => new Error(`The secret with ID ${payload.id} not found.`)),
+          )
+          .otherwise(({ ok }) => of(ok)),
+      ),
+      finalize(() =>
+        this.#state.update((state) => ({
+          ...state,
+          loading: { ...state.loading, update: state.loading.update.filter((id) => id !== payload.id) },
+        })),
+      ),
+    );
   }
 }
