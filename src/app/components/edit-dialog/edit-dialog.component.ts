@@ -68,7 +68,12 @@ export class EditDialogComponent implements OnInit {
     otpType: ['totp', Validators.required],
   });
   isEdit = this.#dialogContext.isEdit;
-  loading = computed(() => this.#secretsService.state().loading.create);
+  loading = computed(() => {
+    const loadingState = this.#secretsService.state().loading;
+    return match(this.#dialogContext)
+      .with({ isEdit: true, data: P.select() }, ({ id }) => loadingState.update.includes(id))
+      .otherwise(() => loadingState.create);
+  });
   readonly otpOptions = [
     { value: 'totp', label: 'TOTP (Time-based OTP)' },
     { value: 'hotp', label: 'HOTP (HMAC-based OTP)', disabled: true },
