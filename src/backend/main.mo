@@ -71,7 +71,7 @@ actor IC2FA {
     let ?set = Map.get(userSecrets, Map.phash, caller) else return #err(#notFound);
     let ?found = findById(set, payload.id) else return #err(#notFound);
     var newSet = secretSet.delete(set, found);
-    newSet := secretSet.put(set, { found with payload; updatedAt = Time.now() });
+    newSet := secretSet.put(newSet, { found with name = payload.name; secretKey = payload.secretKey; otpType = payload.otpType; updatedAt = Time.now() });
     Map.set(userSecrets, Map.phash, caller, newSet);
 
     #ok();
