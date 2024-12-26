@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
@@ -24,9 +23,9 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/brain/progress';
 import { SecretsService } from '@core/services/secrets.service';
 import { fromTimestamp } from '@core/utils';
-import { Secret as SecretRaw, SecretUpdate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
+import { ID, Secret as SecretRaw, SecretUpdate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
 import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard.component';
-import { DialogContext, EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { DialogContext, EditDialogComponent, OperationType } from '../edit-dialog/edit-dialog.component';
 
 interface Secret {
   createdAt: Date;
@@ -70,7 +69,6 @@ interface Secret {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecretItemComponent {
-  #destroyRef = inject(DestroyRef);
   #hlmDialogService = inject(HlmDialogService);
   #secretsService = inject(SecretsService);
   data = computed(() => {
@@ -84,24 +82,40 @@ export class SecretItemComponent {
   });
   dataRaw = input.required<SecretRaw>();
 
-  openEditDialog() {
-    const dialogRef = this.#hlmDialogService.open(EditDialogComponent, {
+  openDeleteDialog() {
+    const data = this.dataRaw();
+    this.#hlmDialogService.open(EditDialogComponent, {
       context: {
-        isEdit: true,
+        action: (payload: ID) => this.#secretsService.delete(payload),
+        closeImmediately: true,
+        loading: computed(() => this.#secretsService.state().loading.delete.includes(data.id)),
+        messages: {
+          loading: 'Deleting the secret...',
+          success: 'The secret has been successfully deleted.',
+        },
+        data,
+        type: OperationType.Delete,
+        onSuccess: () => this.#secretsService.refresh(),
+      } satisfies DialogContext,
+      contentClass: 'min-w-[400px] sm:max-w-[600px]',
+    });
+  }
+
+  openEditDialog() {
+    const data = this.dataRaw();
+    this.#hlmDialogService.open(EditDialogComponent, {
+      context: {
         action: (payload: SecretUpdate) => this.#secretsService.update(payload),
+        loading: computed(() => this.#secretsService.state().loading.update.includes(data.id)),
         messages: {
           loading: 'Updating the secret...',
           success: 'The secret has been successfully updated.',
         },
-        data: this.dataRaw(),
+        data,
+        type: OperationType.Edit,
+        onSuccess: () => this.#secretsService.refresh(),
       } satisfies DialogContext,
       contentClass: 'min-w-[400px] sm:max-w-[600px]',
-    });
-
-    dialogRef.closed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => {
-      if (result) {
-        this.#secretsService.refresh();
-      }
     });
   }
 }

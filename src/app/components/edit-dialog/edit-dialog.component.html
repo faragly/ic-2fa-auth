@@ -1,47 +1,93 @@
-<hlm-dialog-header>
-  <h3 hlmDialogTitle>{{ isEdit ? 'Edit' : 'Create' }} Secret</h3>
-</hlm-dialog-header>
-<form [formGroup]="form" id="addSecretForm" class="grid gap-4" (ngSubmit)="handleSubmit()">
-  <hlm-form-field>
-    <label hlmLabel>
-      Account name
-      <input class="w-full" hlmInput formControlName="name" />
-    </label>
-  </hlm-form-field>
-  <hlm-form-field>
-    <label hlmLabel>
-      Secret key
-      <input class="w-full" hlmInput formControlName="secretKey" />
-    </label>
-  </hlm-form-field>
-  <brn-select id="otpType" placeholder="Select OTP type" formControlName="otpType">
-    <label hlmLabel for="otpType">Type</label>
-    <hlm-select-trigger class="my-1 w-full">
-      <hlm-select-value value="totp" />
-    </hlm-select-trigger>
-    <hlm-select-content>
-      @for (option of otpOptions; track option.value) {
-        <hlm-option [value]="option.value" [disabled]="option.disabled">{{ option.label }}</hlm-option>
+<ng-container [ngTemplateOutlet]="header" />
+<ng-container [ngTemplateOutlet]="content" />
+<ng-container [ngTemplateOutlet]="footer" />
+
+<ng-template #header>
+  <hlm-dialog-header>
+    @switch (dialogContext.type) {
+      @case (operationType.Create) {
+        <h3 hlmDialogTitle>Create Secret</h3>
       }
-    </hlm-select-content>
-  </brn-select>
-</form>
-<hlm-dialog-footer>
-  <button hlmBtn variant="ghost" (click)="close()">Cancel</button>
-  @if (loading()) {
-    <ng-container [ngTemplateOutlet]="loadingButton" />
-  } @else {
-    <button hlmBtn type="submit" form="addSecretForm" [disabled]="form.invalid">
-      @if (isEdit) {
-        <hlm-icon size="sm" class="mr-2" name="lucideSave" /> Save
-      } @else {
-        <hlm-icon size="sm" class="mr-2" name="lucidePlus" /> Create
+      @case (operationType.Edit) {
+        <h3 hlmDialogTitle>Edit Secret</h3>
       }
-    </button>
-  }
-</hlm-dialog-footer>
+      @case (operationType.Delete) {
+        <h3 hlmDialogTitle>Delete Secret</h3>
+        <p hlmDialogDescription>Are you sure you want to delete the secret?</p>
+      }
+    }
+  </hlm-dialog-header>
+</ng-template>
+
+<ng-template #content>
+  <form [formGroup]="form" id="secretForm" class="grid gap-4" (ngSubmit)="handleSubmit()">
+    @switch (dialogContext.type) {
+      @case (operationType.Delete) {}
+      @default {
+        <hlm-form-field>
+          <label hlmLabel>
+            Account name
+            <input class="w-full" hlmInput formControlName="name" />
+          </label>
+        </hlm-form-field>
+        <hlm-form-field>
+          <label hlmLabel>
+            Secret key
+            <input class="w-full" hlmInput formControlName="secretKey" />
+          </label>
+        </hlm-form-field>
+        <brn-select id="otpType" placeholder="Select OTP type" formControlName="otpType">
+          <label hlmLabel for="otpType">Type</label>
+          <hlm-select-trigger class="my-1 w-full">
+            <hlm-select-value value="totp" />
+          </hlm-select-trigger>
+          <hlm-select-content>
+            @for (option of otpOptions; track option.value) {
+              <hlm-option [value]="option.value" [disabled]="option.disabled">{{ option.label }}</hlm-option>
+            }
+          </hlm-select-content>
+        </brn-select>
+      }
+    }
+  </form>
+</ng-template>
+
+<ng-template #footer>
+  <hlm-dialog-footer>
+    <button hlmBtn variant="ghost" (click)="close()">Cancel</button>
+    @if (dialogContext.loading()) {
+      <ng-container [ngTemplateOutlet]="loadingButton" />
+    } @else {
+      <button hlmBtn type="submit" form="secretForm" [disabled]="form.invalid">
+        @switch (dialogContext.type) {
+          @case (operationType.Create) {
+            <hlm-icon size="sm" class="mr-2" name="lucidePlus" /> Create
+          }
+          @case (operationType.Edit) {
+            <hlm-icon size="sm" class="mr-2" name="lucideSave" /> Save
+          }
+          @case (operationType.Delete) {
+            <hlm-icon size="sm" class="mr-2" name="lucideTrash" /> Delete
+          }
+        }
+      </button>
+    }
+  </hlm-dialog-footer>
+</ng-template>
+
 <ng-template #loadingButton>
   <button disabled hlmBtn>
-    <hlm-icon name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" /> {{ isEdit ? 'Saving' : 'Creating' }}
+    <hlm-icon name="lucideLoaderCircle" size="sm" class="mr-2 animate-spin" />
+    @switch (dialogContext.type) {
+      @case (operationType.Create) {
+        Creating
+      }
+      @case (operationType.Edit) {
+        Saving
+      }
+      @case (operationType.Delete) {
+        Deleting
+      }
+    }
   </button>
 </ng-template>

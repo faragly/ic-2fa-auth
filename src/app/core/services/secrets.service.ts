@@ -95,6 +95,29 @@ export class SecretsService {
     );
   }
 
+  delete(id: ID) {
+    this.#state.update((state) => ({
+      ...state,
+      loading: { ...state.loading, delete: [...state.loading.delete, id] },
+    }));
+    return this.actor$.pipe(
+      switchMap((actor) => actor.delete(id)),
+      switchMap((result) =>
+        match(result)
+          .with({ err: { notFound: P.nullish } }, () =>
+            throwError(() => new Error(`The secret with ID ${id} not found.`)),
+          )
+          .otherwise(({ ok }) => of(ok)),
+      ),
+      finalize(() =>
+        this.#state.update((state) => ({
+          ...state,
+          loading: { ...state.loading, delete: state.loading.delete.filter((_id) => _id !== id) },
+        })),
+      ),
+    );
+  }
+
   refresh() {
     this.#refresh.next();
   }

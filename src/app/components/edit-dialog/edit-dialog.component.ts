@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject, Signal, viewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
+  HlmDialogDescriptionDirective,
   HlmDialogFooterComponent,
   HlmDialogHeaderComponent,
   HlmDialogTitleDirective,
@@ -13,22 +13,32 @@ import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
-import { asyncScheduler, EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
-import { lucideLoaderCircle, lucidePlus, lucideSave } from '@ng-icons/lucide';
+import { lucideLoaderCircle, lucidePlus, lucideSave, lucideTrash } from '@ng-icons/lucide';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { BrnSelectComponent, BrnSelectImports } from '@spartan-ng/brain/select';
 import { toast } from 'ngx-sonner';
 import { match, P } from 'ts-pattern';
-import { SecretsService } from '@core/services/secrets.service';
-import { Secret, SecretCreate, SecretUpdate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
+import { ID, Secret, SecretCreate, SecretUpdate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
+
+export enum OperationType {
+  Create,
+  Edit,
+  Delete,
+}
 
 export type DialogContext = {
+  closeImmediately?: boolean;
+  loading: Signal<boolean>;
   messages: { loading: string; success: string };
+  onSuccess?: () => void;
 } & ( // eslint-disable-next-line no-unused-vars
-  | { action: (payload: SecretCreate) => Observable<null>; isEdit: false }
+  | { action: (payload: ID) => Observable<null>; data: Secret; type: OperationType.Delete }
   // eslint-disable-next-line no-unused-vars
-  | { action: (payload: SecretUpdate) => Observable<null>; data: Secret; isEdit: true }
+  | { action: (payload: SecretCreate) => Observable<null>; type: OperationType.Create }
+  // eslint-disable-next-line no-unused-vars
+  | { action: (payload: SecretUpdate) => Observable<null>; data: Secret; type: OperationType.Edit }
 );
 
 @Component({
@@ -38,6 +48,7 @@ export type DialogContext = {
     HlmDialogHeaderComponent,
     HlmDialogFooterComponent,
     HlmDialogTitleDirective,
+    HlmDialogDescriptionDirective,
     HlmLabelDirective,
     HlmInputDirective,
     HlmFormFieldModule,
@@ -47,7 +58,7 @@ export type DialogContext = {
     HlmSelectImports,
     NgTemplateOutlet,
   ],
-  providers: [provideIcons({ lucideLoaderCircle, lucidePlus, lucideSave })],
+  providers: [provideIcons({ lucideLoaderCircle, lucidePlus, lucideSave, lucideTrash })],
   templateUrl: './edit-dialog.component.html',
   styles: `
     :host {
@@ -56,55 +67,103 @@ export type DialogContext = {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditDialogComponent implements OnInit {
-  #destroyRef = inject(DestroyRef);
-  #dialogContext = injectBrnDialogContext<DialogContext>();
+export class EditDialogComponent {
   #dialogRef = inject<BrnDialogRef<boolean>>(BrnDialogRef);
   #fb = inject(FormBuilder);
-  #secretsService = inject(SecretsService);
-  form = this.#fb.nonNullable.group({
-    name: ['', Validators.required],
-    secretKey: ['', Validators.required],
-    otpType: ['totp', Validators.required],
-  });
-  isEdit = this.#dialogContext.isEdit;
-  loading = computed(() => {
-    const loadingState = this.#secretsService.state().loading;
-    return match(this.#dialogContext)
-      .with({ isEdit: true, data: P.select() }, ({ id }) => loadingState.update.includes(id))
-      .otherwise(() => loadingState.create);
-  });
+  dialogContext = injectBrnDialogContext<DialogContext>();
+  form = this.#fb.nonNullable.record({});
+  readonly operationType = OperationType;
   readonly otpOptions = [
     { value: 'totp', label: 'TOTP (Time-based OTP)' },
     { value: 'hotp', label: 'HOTP (HMAC-based OTP)', disabled: true },
   ];
-  select = viewChild.required(BrnSelectComponent);
+  select = viewChild(BrnSelectComponent);
+
+  constructor() {
+    switch (this.dialogContext.type) {
+      case OperationType.Create: {
+        this.#registerCreateFormControls();
+        break;
+      }
+      case OperationType.Edit: {
+        this.#registerEditFormControls(this.dialogContext.data);
+        break;
+      }
+      case OperationType.Delete: {
+        this.#registerDeleteFormControls(this.dialogContext.data);
+        break;
+      }
+    }
+  }
+
+  #registerCreateFormControls() {
+    this.form.registerControl('name', this.#fb.nonNullable.control('', [Validators.required]));
+    this.form.registerControl('secretKey', this.#fb.nonNullable.control('', [Validators.required]));
+    this.form.registerControl('otpType', this.#fb.nonNullable.control('totp', [Validators.required]));
+    // workaround for select initial value
+    afterNextRender(() => this.select()?.writeValue('totp'));
+  }
+
+  #registerDeleteFormControls(data: Secret) {
+    this.form.registerControl('id', this.#fb.nonNullable.control(data.id, [Validators.required]));
+  }
+
+  #registerEditFormControls(data: Secret) {
+    this.form.registerControl('id', this.#fb.nonNullable.control(data.id, [Validators.required]));
+    this.form.registerControl('name', this.#fb.nonNullable.control(data.name, [Validators.required]));
+    this.form.registerControl('secretKey', this.#fb.nonNullable.control(data.secretKey, [Validators.required]));
+    const otpType = Object.keys(data.otpType)[0];
+    this.form.registerControl('otpType', this.#fb.nonNullable.control(otpType, [Validators.required]));
+    // workaround for select initial value
+    afterNextRender(() => this.select()?.writeValue(otpType));
+  }
 
   close() {
     this.#dialogRef.close();
   }
 
   handleSubmit() {
-    const { name, otpType: otpTypeRaw, secretKey } = this.form.getRawValue();
-    const otpType = { [otpTypeRaw]: null } as SecretCreate['otpType'];
-    const action$ = match(this.#dialogContext)
-      .with({ isEdit: true, data: P.select('item'), action: P.select('action') }, ({ item: { id }, action }) =>
-        action({
-          id,
-          name,
-          secretKey,
-          otpType,
-        }),
+    const action$ = match({ context: this.dialogContext, formValue: this.form.getRawValue() })
+      .with(
+        {
+          context: { type: OperationType.Edit, action: P.select('action') },
+          formValue: P.select('payload', {
+            id: P.string,
+            name: P.string,
+            secretKey: P.string,
+            otpType: P.union('totp', 'hotp'),
+          }),
+        },
+
+        ({ action, payload }) =>
+          action({ ...payload, otpType: { [payload.otpType]: null } as SecretCreate['otpType'] }),
       )
-      .with({ isEdit: false, action: P.select() }, (action) =>
-        action({
-          name,
-          secretKey,
-          otpType,
-        }),
+      .with(
+        {
+          context: { type: OperationType.Create, action: P.select('action') },
+          formValue: P.select('payload', {
+            name: P.string,
+            secretKey: P.string,
+            otpType: P.union('totp', 'hotp'),
+          }),
+        },
+        ({ action, payload }) =>
+          action({ ...payload, otpType: { [payload.otpType]: null } as SecretCreate['otpType'] }),
       )
-      .exhaustive();
-    const toastId = toast.loading(this.#dialogContext.messages.loading);
+      .with(
+        {
+          context: { type: OperationType.Delete, action: P.select('action') },
+          formValue: { id: P.string.select('id') },
+        },
+        ({ action, id }) => action(id),
+      )
+      .run();
+    const toastId = toast.loading(this.dialogContext.messages.loading);
+
+    if (this.dialogContext.closeImmediately) {
+      this.#dialogRef.close();
+    }
+
     action$
       .pipe(
         catchError((err) => {
@@ -113,22 +172,11 @@ export class EditDialogComponent implements OnInit {
           return EMPTY;
         }),
         take(1),
-        takeUntilDestroyed(this.#destroyRef),
       )
       .subscribe(() => {
-        toast.success(this.#dialogContext.messages.success, { id: toastId });
-        this.#dialogRef.close(true);
+        toast.success(this.dialogContext.messages.success, { id: toastId });
+        if (this.#dialogRef.state() === 'open') this.#dialogRef.close();
+        if (this.dialogContext.onSuccess) this.dialogContext.onSuccess();
       });
-  }
-
-  ngOnInit(): void {
-    asyncScheduler.schedule(() =>
-      match(this.#dialogContext)
-        .with({ isEdit: true, data: P.select() }, ({ name, secretKey, otpType }) => {
-          this.form.patchValue({ name, secretKey, otpType: Object.keys(otpType)[0] });
-        })
-        // workaround for select initial value
-        .otherwise(() => this.select().writeValue(this.form.value.otpType)),
-    );
   }
 }
