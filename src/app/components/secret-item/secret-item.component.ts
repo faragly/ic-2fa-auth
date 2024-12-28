@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
@@ -18,9 +19,12 @@ import {
 } from '@spartan-ng/ui-menu-helm';
 import { HlmProgressDirective, HlmProgressIndicatorDirective } from '@spartan-ng/ui-progress-helm';
 import { HlmMutedDirective } from '@spartan-ng/ui-typography-helm';
+import { defer, of, timer } from 'rxjs';
+import { connect, ignoreElements, mergeWith, repeat, switchMap } from 'rxjs/operators';
 import { lucideClipboard, lucideEllipsis, lucidePen, lucideTrash, lucideView } from '@ng-icons/lucide';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/brain/progress';
+import { TOTP } from 'totp-generator';
 import { SecretsService } from '@core/services/secrets.service';
 import { fromTimestamp } from '@core/utils';
 import { ID, Secret as SecretRaw, SecretUpdate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
@@ -81,6 +85,32 @@ export class SecretItemComponent {
     } satisfies Secret;
   });
   dataRaw = input.required<SecretRaw>();
+  otp = computed(() => this.token()?.otp);
+  progress = computed(() => Math.round((this.seconds() / 30) * 100));
+  seconds = computed(() => {
+    const now = this.#secretsService.state().now;
+    const token = this.token() as NonNullable<ReturnType<typeof this.token>>;
+    return Math.min(Math.max(Math.round((token.expires - now) / 1000), 0), 30);
+  });
+  token = toSignal(
+    toObservable(this.data).pipe(
+      switchMap(({ secretKey }) =>
+        defer(() => of(TOTP.generate(secretKey))).pipe(
+          connect((shared) =>
+            shared.pipe(
+              mergeWith(
+                shared.pipe(
+                  switchMap(({ expires }) => timer(new Date(expires))),
+                  ignoreElements(),
+                ),
+              ),
+            ),
+          ),
+          repeat(),
+        ),
+      ),
+    ),
+  );
 
   openDeleteDialog() {
     const data = this.dataRaw();

@@ -2,8 +2,17 @@ import { inject, Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActorSubclass } from '@dfinity/agent';
 import { connect } from 'ngxtension/connect';
-import { from, Observable, of, ReplaySubject, Subject, throwError } from 'rxjs';
-import { concatWith, endWith, finalize, mergeWith, connect as rxConnect, shareReplay, switchMap } from 'rxjs/operators';
+import { from, interval, Observable, of, ReplaySubject, Subject, throwError } from 'rxjs';
+import {
+  concatWith,
+  endWith,
+  finalize,
+  map,
+  mergeWith,
+  connect as rxConnect,
+  shareReplay,
+  switchMap,
+} from 'rxjs/operators';
 import { match, P } from 'ts-pattern';
 import { AUTH_SERVICE } from '@core/tokens';
 import { createActor } from '@core/utils';
@@ -22,6 +31,7 @@ interface State {
   actor: ActorSubclass<BackendActor> | null;
   data: Secret[];
   loading: Record<'create' | 'list', boolean> & Record<'delete' | 'update', ID[]>;
+  now: number;
 }
 
 const INITIAL_VALUE: State = {
@@ -33,6 +43,7 @@ const INITIAL_VALUE: State = {
     delete: [],
     update: [],
   },
+  now: Date.now(),
 };
 
 @Injectable({
@@ -59,6 +70,7 @@ export class SecretsService {
   constructor() {
     connect(this.#state, this.actor$, (state, actor) => ({ ...state, actor }));
     this.#initListObserving();
+    connect(this.#state, interval(1000).pipe(map(() => ({ now: Date.now() }))));
   }
 
   #initListObserving() {

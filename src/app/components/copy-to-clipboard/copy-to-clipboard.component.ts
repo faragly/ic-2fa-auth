@@ -15,7 +15,8 @@ import { lucideClipboard } from '@ng-icons/lucide';
       hlmTooltipTrigger="Copy to clipboard"
       size="icon"
       variant="ghost"
-      aria-describedby="Copy to clipboard">
+      aria-describedby="Copy to clipboard"
+      (click)="copy($event)">
       <hlm-icon size="sm" name="lucideClipboard" />
     </button>
   `,
