@@ -14,7 +14,7 @@
       </div>
       <div class="flex flex-1 items-center justify-between gap-2 md:justify-end">
         <div class="w-full flex-1 md:w-auto md:flex-none">
-          <input class="w-full sm:pr-12 md:w-80" hlmInput placeholder="Search" type="search" />
+          <input class="w-full sm:pr-12 md:w-80" hlmInput placeholder="Search" type="search" [(ngModel)]="filter" />
         </div>
         <nav class="flex items-center gap-1">
           <button hlmBtn variant="ghost">
@@ -36,7 +36,7 @@
       <h2 class="text-3xl font-bold tracking-tight">Dashboard</h2>
       <app-create-secret />
     </div>
-    <app-secret-list />
+    <app-secret-list [filter]="filter()" />
   </main>
   <footer class="bg-blur-lg grid border-t border-border bg-background/95 px-4 py-4">
     <img class="h-5 justify-self-end dark:hidden" alt="100% on-chain" src="fully-on-chain-dark.svg" />

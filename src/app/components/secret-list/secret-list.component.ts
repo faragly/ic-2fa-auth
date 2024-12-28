@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, Signal } from '@angular/core';
 import { SecretsService } from '@core/services/secrets.service';
 import { Secret } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
 import { EmptyComponent } from '../empty/empty.component';
@@ -13,5 +13,11 @@ import { SecretItemComponent } from '../secret-item/secret-item.component';
 })
 export class SecretListComponent {
   #secretsService = inject(SecretsService);
-  items: Signal<Secret[]> = computed(() => this.#secretsService.state().data);
+  filter = input.required<string>();
+  items: Signal<Secret[]> = computed(() => {
+    const data = this.#secretsService.state().data;
+    const filter = this.filter();
+
+    return filter ? data.filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase())) : data;
+  });
 }

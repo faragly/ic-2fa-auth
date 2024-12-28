@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, model } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
@@ -12,6 +13,7 @@ import { UserMenuComponent } from '../user-menu/user-menu.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    FormsModule,
     HlmInputDirective,
     HlmIconComponent,
     HlmButtonDirective,
@@ -26,5 +28,6 @@ import { UserMenuComponent } from '../user-menu/user-menu.component';
 })
 export class DashboardComponent {
   readonly appName = environment.appName;
+  filter = model('');
   secretsService = inject(SecretsService);
 }
