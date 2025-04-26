@@ -1,14 +1,14 @@
 import { Component, computed, contentChild, inject, input } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
+import { hlm } from '@spartan-ng/brain/core';
 import { BrnSelectComponent, BrnSelectTriggerDirective } from '@spartan-ng/brain/select';
-import { hlm } from '@spartan-ng/ui-core';
-import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { ClassValue } from 'clsx';
 
 export const selectTriggerVariants = cva(
-	'flex items-center justify-between rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+	'flex items-center justify-between rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
 	{
 		variants: {
 			size: {
@@ -31,23 +31,21 @@ type SelectTriggerVariants = VariantProps<typeof selectTriggerVariants>;
 
 @Component({
 	selector: 'hlm-select-trigger',
-	standalone: true,
-	imports: [BrnSelectTriggerDirective, HlmIconComponent],
+	imports: [BrnSelectTriggerDirective, NgIcon, HlmIconDirective],
 	providers: [provideIcons({ lucideChevronDown })],
-
 	template: `
 		<button [class]="_computedClass()" #button hlmInput brnSelectTrigger type="button">
 			<ng-content />
 			@if (icon()) {
-				<ng-content select="hlm-icon" />
+				<ng-content select="ng-icon" />
 			} @else {
-				<hlm-icon class="ml-2 h-4 w-4 flex-none" name="lucideChevronDown" />
+				<ng-icon hlm size="sm" class="ml-2 flex-none" name="lucideChevronDown" />
 			}
 		</button>
 	`,
 })
 export class HlmSelectTriggerComponent {
-	protected readonly icon = contentChild(HlmIconComponent);
+	protected readonly icon = contentChild(HlmIconDirective);
 
 	protected readonly brnSelect = inject(BrnSelectComponent, { optional: true });
 

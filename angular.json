@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": ["angular-eslint"]
   },
   "projects": {
     "ic-2fa-auth": {
@@ -59,7 +59,12 @@
             ],
             "styles": ["src/styles.css"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["borc", "simple-cbor", "base64-arraybuffer", "buffer"],
+            "allowedCommonJsDependencies": [
+              "borc",
+              "simple-cbor",
+              "base64-arraybuffer",
+              "buffer"
+            ],
             "ngxEnv": {
               "prefix": "^(CANISTER_ID|DFX)_"
             }
@@ -86,6 +91,15 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -106,6 +120,9 @@
             },
             "development": {
               "buildTarget": "ic-2fa-auth:build:development"
+            },
+            "staging": {
+              "buildTarget": "ic-2fa-auth:build:staging"
             }
           },
           "defaultConfiguration": "development"
@@ -118,6 +135,9 @@
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
+        },
+        "test": {
+          "builder": "@analogjs/vitest-angular:test"
         }
       }
     }

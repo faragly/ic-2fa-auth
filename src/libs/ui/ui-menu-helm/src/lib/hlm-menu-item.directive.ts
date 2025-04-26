@@ -1,8 +1,8 @@
-import { booleanAttribute, computed, Directive, Input, input, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
-import { cva, type VariantProps } from 'class-variance-authority';
-import type { ClassValue } from 'clsx';
+import { Directive, Input, booleanAttribute, computed, input, signal } from '@angular/core';
+import { hlm } from '@spartan-ng/brain/core';
 import { BrnMenuItemDirective } from '@spartan-ng/brain/menu';
+import { type VariantProps, cva } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
 
 export const hlmMenuItemVariants = cva(
 	'group w-full relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50',
@@ -28,10 +28,10 @@ export type HlmMenuItemVariants = VariantProps<typeof hlmMenuItemVariants>;
 	],
 })
 export class HlmMenuItemDirective {
-	protected _computedClass = computed(() => hlm(hlmMenuItemVariants({ inset: this._inset() }), this.userClass()));
-
 	private readonly _inset = signal<boolean>(false);
+
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmMenuItemVariants({ inset: this._inset() }), this.userClass()));
 
 	@Input({ transform: booleanAttribute })
 	public set inset(value: boolean) {

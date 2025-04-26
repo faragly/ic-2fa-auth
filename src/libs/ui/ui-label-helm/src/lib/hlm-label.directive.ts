@@ -1,8 +1,8 @@
-import { computed, Directive, inject, input, signal } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
-import { cva, type VariantProps } from 'class-variance-authority';
-import type { ClassValue } from 'clsx';
+import { Directive, computed, inject, input, signal } from '@angular/core';
+import { hlm } from '@spartan-ng/brain/core';
 import { BrnLabelDirective } from '@spartan-ng/brain/label';
+import { type VariantProps, cva } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
 
 export const labelVariants = cva(
 	'text-sm font-medium leading-none [&>[hlmInput]]:my-1 [&:has([hlmInput]:disabled)]:cursor-not-allowed [&:has([hlmInput]:disabled)]:opacity-70',
@@ -43,6 +43,18 @@ export type LabelVariants = VariantProps<typeof labelVariants>;
 	},
 })
 export class HlmLabelDirective {
+	private readonly _brn = inject(BrnLabelDirective, { host: true });
+
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+
+	public readonly variant = input<LabelVariants['variant']>('default');
+
+	public readonly error = input<LabelVariants['error']>('auto');
+
+	protected readonly state = computed(() => ({
+		error: signal(this.error()),
+	}));
+
 	protected readonly _computedClass = computed(() =>
 		hlm(
 			labelVariants({
@@ -54,18 +66,6 @@ export class HlmLabelDirective {
 			this.userClass(),
 		),
 	);
-
-	protected readonly state = computed(() => ({
-		error: signal(this.error()),
-	}));
-
-	private readonly _brn = inject(BrnLabelDirective, { host: true });
-
-	public readonly error = input<LabelVariants['error']>('auto');
-
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-
-	public readonly variant = input<LabelVariants['variant']>('default');
 
 	setError(error: LabelVariants['error']): void {
 		this.state().error.set(error);

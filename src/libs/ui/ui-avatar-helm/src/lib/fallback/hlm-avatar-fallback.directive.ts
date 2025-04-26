@@ -1,6 +1,6 @@
-import { computed, Directive, inject } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { Directive, computed, inject } from '@angular/core';
 import { BrnAvatarFallbackDirective, hexColorFor, isBright } from '@spartan-ng/brain/avatar';
+import { hlm } from '@spartan-ng/brain/core';
 
 @Directive({
 	selector: '[hlmAvatarFallback]',
@@ -18,23 +18,23 @@ import { BrnAvatarFallbackDirective, hexColorFor, isBright } from '@spartan-ng/b
 	},
 })
 export class HlmAvatarFallbackDirective {
-	protected readonly _computedClass = computed(() => {
-		return hlm(
-			'flex h-full w-full items-center justify-center rounded-full',
-			this._autoColorTextCls() ?? 'bg-muted',
-			this._brn?.userClass(),
-		);
+	private readonly _brn = inject(BrnAvatarFallbackDirective);
+	private readonly _hex = computed(() => {
+		if (!this._brn.autoColor() || !this._brn.getTextContent()) return;
+		return hexColorFor(this._brn.getTextContent());
 	});
+
 	private readonly _autoColorTextCls = computed(() => {
 		const hex = this._hex();
 		if (!hex) return;
 		return `${isBright(hex) ? 'text-black' : 'text-white'}`;
 	});
 
-	private readonly _brn = inject(BrnAvatarFallbackDirective);
-
-	private readonly _hex = computed(() => {
-		if (!this._brn.autoColor() || !this._brn.getTextContent()) return;
-		return hexColorFor(this._brn.getTextContent());
+	protected readonly _computedClass = computed(() => {
+		return hlm(
+			'flex h-full w-full items-center justify-center rounded-full',
+			this._autoColorTextCls() ?? 'bg-muted',
+			this._brn?.userClass(),
+		);
 	});
 }

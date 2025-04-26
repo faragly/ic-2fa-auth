@@ -1,3 +1,6 @@
+@reference 'tailwindcss';
+@reference '@spartan-ng/brain/hlm-tailwind-preset.css';
+
 :host {
   @apply relative flex min-h-screen flex-col border-border/40 dark:border-border;
 }

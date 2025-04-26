@@ -4,6 +4,7 @@
     "rust-lang.rust-analyzer",
     "angular.ng-template",
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss"
   ]
 }

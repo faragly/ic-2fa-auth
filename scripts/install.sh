@@ -12,7 +12,7 @@ dfx deps pull
 dfx deps init --argument '(null)' internet-identity
 
 # install dependencies
-npm ci --no-audit
+# npm ci --no-audit
 mops install
 
 # deploy canisters in local

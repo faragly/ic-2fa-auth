@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { hlm } from '@spartan-ng/brain/core';
 import type { ClassValue } from 'clsx';
 
 @Component({
@@ -13,8 +13,8 @@ import type { ClassValue } from 'clsx';
 	},
 })
 export class HlmMenuShortcutComponent {
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm('ml-auto font-light text-xs tracking-widest opacity-60', this.userClass()),
 	);
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 }

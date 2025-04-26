@@ -1,5 +1,5 @@
-import { computed, Directive, input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { Directive, computed, input } from '@angular/core';
+import { hlm } from '@spartan-ng/brain/core';
 import type { ClassValue } from 'clsx';
 
 export type HlmSeparatorOrientation = 'horizontal' | 'vertical';
@@ -11,6 +11,8 @@ export type HlmSeparatorOrientation = 'horizontal' | 'vertical';
 	},
 })
 export class HlmSeparatorDirective {
+	public readonly orientation = input<HlmSeparatorOrientation>('horizontal');
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 	protected _computedClass = computed(() =>
 		hlm(
 			'inline-flex shrink-0 border-0 bg-border',
@@ -18,6 +20,4 @@ export class HlmSeparatorDirective {
 			this.userClass(),
 		),
 	);
-	public readonly orientation = input<HlmSeparatorOrientation>('horizontal');
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
 }

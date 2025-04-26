@@ -49,3 +49,4 @@ deps
 
 .nx
 replica.log
+*.crt

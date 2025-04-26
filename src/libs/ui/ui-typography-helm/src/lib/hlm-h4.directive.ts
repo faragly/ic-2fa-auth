@@ -1,5 +1,5 @@
-import { computed, Directive, input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { Directive, computed, input } from '@angular/core';
+import { hlm } from '@spartan-ng/brain/core';
 import type { ClassValue } from 'clsx';
 
 export const hlmH4 = 'scroll-m-20 text-xl font-semibold tracking-tight';
@@ -12,6 +12,6 @@ export const hlmH4 = 'scroll-m-20 text-xl font-semibold tracking-tight';
 	},
 })
 export class HlmH4Directive {
-	protected _computedClass = computed(() => hlm(hlmH4, this.userClass()));
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmH4, this.userClass()));
 }

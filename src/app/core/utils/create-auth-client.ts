@@ -1,20 +1,17 @@
-import { SignIdentity } from '@dfinity/agent';
-import { AuthClient } from '@dfinity/auth-client';
-import { PartialIdentity } from '@dfinity/identity';
+import { AuthClient, AuthClientCreateOptions } from '@dfinity/auth-client';
 
-export async function createAuthClient(identity?: PartialIdentity | SignIdentity): Promise<AuthClient> {
-  return await AuthClient.create({
-    identity,
+import { TauriStorage } from './tauri-storage';
+
+export async function createAuthClient(): Promise<AuthClient> {
+  const options: AuthClientCreateOptions = {
     // Idle checks aren't needed
     idleOptions: {
       disableDefaultIdleCallback: true,
       disableIdle: true,
     },
-    // noop storage
-    storage: {
-      get: () => Promise.resolve(null),
-      remove: () => Promise.resolve(),
-      set: () => Promise.resolve(),
-    },
-  });
+    keyType: 'Ed25519',
+    storage: new TauriStorage(),
+  };
+
+  return await AuthClient.create(options);
 }

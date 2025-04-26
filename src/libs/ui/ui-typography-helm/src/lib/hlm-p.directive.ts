@@ -1,5 +1,5 @@
-import { computed, Directive, input } from '@angular/core';
-import { hlm } from '@spartan-ng/ui-core';
+import { Directive, computed, input } from '@angular/core';
+import { hlm } from '@spartan-ng/brain/core';
 import type { ClassValue } from 'clsx';
 
 export const hlmP = 'leading-7 [&:not(:first-child)]:mt-6';
@@ -12,6 +12,6 @@ export const hlmP = 'leading-7 [&:not(:first-child)]:mt-6';
 	},
 })
 export class HlmPDirective {
-	protected _computedClass = computed(() => hlm(hlmP, this.userClass()));
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected _computedClass = computed(() => hlm(hlmP, this.userClass()));
 }

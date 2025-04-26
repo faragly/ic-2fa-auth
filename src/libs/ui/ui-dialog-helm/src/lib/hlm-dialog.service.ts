@@ -9,8 +9,7 @@ import {
 import { HlmDialogContentComponent } from './hlm-dialog-content.component';
 import { hlmDialogOverlayClass } from './hlm-dialog-overlay.directive';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type HlmDialogOptions<DialogContext = any> = BrnDialogOptions & {
+export type HlmDialogOptions<DialogContext = unknown> = BrnDialogOptions & {
 	contentClass?: string;
 	context?: DialogContext;
 };
@@ -24,11 +23,10 @@ export class HlmDialogService {
 	public open(component: ComponentType<unknown> | TemplateRef<unknown>, options?: Partial<HlmDialogOptions>) {
 		const mergedOptions = {
 			...DEFAULT_BRN_DIALOG_OPTIONS,
-			closeDelay: 100,
 
 			...(options ?? {}),
 			backdropClass: cssClassesToArray(`${hlmDialogOverlayClass} ${options?.backdropClass ?? ''}`),
-			context: { ...options?.context, $component: component, $dynamicComponentClass: options?.contentClass },
+			context: { ...(options?.context ?? {}), $component: component, $dynamicComponentClass: options?.contentClass },
 		};
 
 		return this._brnDialogService.open(HlmDialogContentComponent, undefined, mergedOptions.context, mergedOptions);

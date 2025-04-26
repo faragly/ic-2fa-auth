@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { HlmProgressIndicatorDirective } from './lib/hlm-progress-indicator.directive';
 import { HlmProgressDirective } from './lib/hlm-progress.directive';
 

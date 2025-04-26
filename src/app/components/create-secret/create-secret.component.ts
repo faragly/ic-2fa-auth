@@ -1,23 +1,34 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideLoaderCircle, lucidePlus } from '@ng-icons/lucide';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { lucideLoaderCircle, lucidePlus } from '@ng-icons/lucide';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+
+import {
+  DialogContext,
+  EditDialogComponent,
+  OperationType,
+} from '../edit-dialog/edit-dialog.component';
 import { SecretsService } from '@core/services/secrets.service';
 import { SecretCreate } from '@declarations/ic-2fa-auth-backend/ic-2fa-auth-backend.did';
-import { DialogContext, EditDialogComponent, OperationType } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-create-secret',
-  imports: [HlmButtonDirective, HlmIconComponent],
+  imports: [HlmButtonDirective, HlmIconDirective, NgIcon],
   providers: [provideIcons({ lucideLoaderCircle, lucidePlus })],
   templateUrl: './create-secret.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateSecretComponent {
-  #hlmDialogService = inject(HlmDialogService);
   #secretsService = inject(SecretsService);
   loading = computed(() => this.#secretsService.state().loading.create);
+  #hlmDialogService = inject(HlmDialogService);
 
   openCreateDialog() {
     this.#hlmDialogService.open(EditDialogComponent, {

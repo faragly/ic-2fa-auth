@@ -1,10 +1,11 @@
-import { isDevMode } from '@angular/core';
 import { Actor, ActorSubclass, Identity } from '@dfinity/agent';
 import { IDL } from '@dfinity/candid';
 import { Principal } from '@dfinity/principal';
 import { createAgent } from '@dfinity/utils';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { environment } from '@environments/environment';
 
 export function createActor<T>({
   identity,
@@ -17,7 +18,9 @@ export function createActor<T>({
   identity: Identity;
   idlFactory: IDL.InterfaceFactory;
 }): Observable<ActorSubclass<T>> {
-  return from(createAgent({ identity, fetchRootKey: isDevMode(), host })).pipe(
+  return from(
+    createAgent({ identity, fetchRootKey: !environment.production, host }),
+  ).pipe(
     map((agent) =>
       Actor.createActor<T>(idlFactory, {
         agent,

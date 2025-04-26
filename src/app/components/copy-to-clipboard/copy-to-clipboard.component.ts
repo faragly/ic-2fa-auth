@@ -1,13 +1,25 @@
 import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { HlmTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-helm';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideClipboard } from '@ng-icons/lucide';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmTooltipTriggerDirective } from '@spartan-ng/ui-tooltip-helm';
 
 @Component({
   selector: 'app-copy-to-clipboard',
-  imports: [ClipboardModule, HlmButtonDirective, HlmIconComponent, HlmTooltipTriggerDirective],
+  imports: [
+    ClipboardModule,
+    HlmButtonDirective,
+    HlmIconDirective,
+    NgIcon,
+    HlmTooltipTriggerDirective,
+  ],
   template: `
     <button
       class="size-8"
@@ -17,7 +29,7 @@ import { lucideClipboard } from '@ng-icons/lucide';
       variant="ghost"
       aria-describedby="Copy to clipboard"
       (click)="copy($event)">
-      <hlm-icon size="sm" name="lucideClipboard" />
+      <ng-icon hlm size="sm" name="lucideClipboard" />
     </button>
   `,
   styles: ``,
@@ -25,8 +37,8 @@ import { lucideClipboard } from '@ng-icons/lucide';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyToClipboardComponent {
-  #clipboard = inject(Clipboard);
   content = input.required<string>();
+  #clipboard = inject(Clipboard);
 
   copy(event: MouseEvent) {
     event.stopPropagation();

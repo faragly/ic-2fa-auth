@@ -1,14 +1,22 @@
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, RedirectCommand, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+
 import { AUTH_SERVICE } from '@core/tokens';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const dashboardGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const authService = inject(AUTH_SERVICE);
+export const dashboardGuard: CanActivateFn = () => {
   const router = inject(Router);
-  if (!authService.isAuthenticated()) {
-    const loginPath = router.parseUrl('/auth');
-    return new RedirectCommand(loginPath);
-  }
-  return true;
+  const authService = inject(AUTH_SERVICE);
+  return authService.ready$.pipe(
+    filter((v) => v),
+    map(() => {
+      const isAuthenticated = authService.isAuthenticated();
+      if (!isAuthenticated) {
+        const loginPath = router.parseUrl('/auth');
+        return new RedirectCommand(loginPath, { skipLocationChange: true });
+      }
+
+      return true;
+    }),
+  );
 };

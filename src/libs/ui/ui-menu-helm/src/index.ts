@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { HlmMenuBarItemDirective } from './lib/hlm-menu-bar-item.directive';
 import { HlmMenuBarComponent } from './lib/hlm-menu-bar.component';
 import { HlmMenuGroupComponent } from './lib/hlm-menu-group.component';

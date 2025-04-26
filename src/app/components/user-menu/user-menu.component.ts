@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { HlmAvatarComponent, HlmAvatarImageDirective } from '@spartan-ng/ui-avatar-helm';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmIconComponent, provideIcons } from '@spartan-ng/ui-icon-helm';
-import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
-import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideLogOut } from '@ng-icons/lucide';
 import {
   BrnPopoverCloseDirective,
@@ -13,8 +14,17 @@ import {
   BrnPopoverTriggerDirective,
 } from '@spartan-ng/brain/popover';
 import { BrnSeparatorComponent } from '@spartan-ng/brain/separator';
-import { AUTH_SERVICE } from '@core/tokens';
+import {
+  HlmAvatarComponent,
+  HlmAvatarImageDirective,
+} from '@spartan-ng/ui-avatar-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
+import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
+
 import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard.component';
+import { AUTH_SERVICE } from '@core/tokens';
 
 @Component({
   selector: 'app-user-menu',
@@ -30,13 +40,17 @@ import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard
     HlmSeparatorDirective,
     BrnSeparatorComponent,
     CopyToClipboardComponent,
-    HlmIconComponent,
+    NgIcon,
+    HlmIconDirective,
   ],
   template: `
     <brn-popover sideOffset="5" closeDelay="100" align="end">
       <button brnPopoverTrigger class="cursor-default">
         <hlm-avatar class="border-gray-800 bg-gray-100">
-          <img src="avatar-placeholder.svg" alt="avatar placeholder" hlmAvatarImage />
+          <img
+            src="avatar-placeholder.svg"
+            alt="avatar placeholder"
+            hlmAvatarImage />
         </hlm-avatar>
       </button>
       <div hlmPopoverContent class="grid w-80 p-1" *brnPopoverContent="let ctx">
@@ -44,7 +58,9 @@ import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard
           <h4 class="font-medium leading-none">Principal ID</h4>
           @let principalId = authService.principalId();
           <div class="flex items-center gap-2">
-            <p class="truncate font-mono text-sm text-muted-foreground">{{ principalId }}</p>
+            <p class="truncate font-mono text-sm text-muted-foreground">
+              {{ principalId }}
+            </p>
             <app-copy-to-clipboard [content]="principalId" />
           </div>
         </div>
@@ -56,7 +72,7 @@ import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard
           aria-describedby="Sign out"
           brnPopoverClose
           (click)="authService.signOut()">
-          <hlm-icon size="sm" name="lucideLogOut" class="mr-2" />
+          <ng-icon hlm size="sm" name="lucideLogOut" class="mr-2" />
           Sign out
         </button>
       </div>
@@ -67,8 +83,8 @@ import { CopyToClipboardComponent } from '../copy-to-clipboard/copy-to-clipboard
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserMenuComponent {
-  #router = inject(Router);
   authService = inject(AUTH_SERVICE);
+  #router = inject(Router);
 
   constructor() {
     effect(() => {

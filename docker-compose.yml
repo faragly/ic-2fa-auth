@@ -1,6 +1,18 @@
-name: "ic-2fa-auth"
+name: 'ic-2fa-auth'
 
 services:
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+
   backend:
     image: ghcr.io/dfinity/icp-dev-env-slim:latest
     platform: linux/amd64
@@ -11,10 +23,14 @@ services:
     environment:
       - DFX_DEV_IDENTITY=${DFX_DEV_IDENTITY:-ic2fa}
     entrypoint: ['sh', '-c', 'scripts/install.sh']
-    healthcheck: 
+    healthcheck:
       test: ['CMD', 'dfx', 'ping']
       interval: 15s
       timeout: 1m
     tty: true
-    ports:
-      - 4943:4943
+    expose:
+      - 4943
+
+volumes:
+  caddy_data:
+  caddy_config:

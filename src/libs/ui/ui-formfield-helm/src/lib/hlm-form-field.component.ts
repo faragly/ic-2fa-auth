@@ -5,14 +5,14 @@ import { HlmErrorDirective } from './hlm-error.directive';
 @Component({
 	selector: 'hlm-form-field',
 	template: `
-		<ng-content />
+		<ng-content></ng-content>
 
 		@switch (hasDisplayedMessage()) {
 			@case ('error') {
-				<ng-content select="hlm-error" />
+				<ng-content select="hlm-error"></ng-content>
 			}
 			@default {
-				<ng-content select="hlm-hint" />
+				<ng-content select="hlm-hint"></ng-content>
 			}
 		}
 	`,
@@ -22,13 +22,13 @@ import { HlmErrorDirective } from './hlm-error.directive';
 	},
 })
 export class HlmFormFieldComponent {
-	protected readonly hasDisplayedMessage = computed<'error' | 'hint'>(() =>
-		this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint',
-	);
-
 	public readonly control = contentChild(BrnFormFieldControl);
 
 	public readonly errorChildren = contentChildren(HlmErrorDirective);
+
+	protected readonly hasDisplayedMessage = computed<'error' | 'hint'>(() =>
+		this.errorChildren() && this.errorChildren().length > 0 && this.control()?.errorState() ? 'error' : 'hint',
+	);
 
 	constructor() {
 		effect(() => {

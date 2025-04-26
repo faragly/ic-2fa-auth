@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { HlmAvatarFallbackDirective } from './lib/fallback';
 import { HlmAvatarComponent } from './lib/hlm-avatar.component';
 import { HlmAvatarImageDirective } from './lib/image';

@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-empty',
   template: `
-    <div class="flex max-w-[320px] flex-col items-center justify-center gap-2 fill-zinc-500">
+    <div
+      class="flex max-w-[320px] flex-col items-center justify-center gap-2 fill-zinc-500">
       <svg aria-hidden="true" width="196" height="196" viewBox="0 0 196 196">
         <path
           d="M35 177.5c-19.5-9-29.35-26.54-26-82s14.8-66.9 32.5-73S127.72.55 161.5 28s37.46 52.67 23 96.5c-14.46 43.84-22.26 63.24-60 61-11.4-.68-22.3-.85-32.5-1.02-23.56-.38-43.4-.7-57-6.98M33 42v26a7 7 0 0 0 7 7h113a7 7 0 0 0 7-7V42a7 7 0 0 0-7-7H40a7 7 0 0 0-7 7m7 39a7 7 0 0 0-7 7v27a7 7 0 0 0 7 7h113a7 7 0 0 0 7-7V88a7 7 0 0 0-7-7z"
@@ -18,6 +19,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     </div>
   `,
   styles: `
+    @reference "tailwindcss";
     :host {
       @apply flex h-full w-full grow items-center justify-center self-center py-12;
     }

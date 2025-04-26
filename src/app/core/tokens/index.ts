@@ -1,4 +1,5 @@
 import { InjectionToken, Provider } from '@angular/core';
+
 import { IAuthService } from '@core/models/auth';
 import { AuthService } from '@core/services/auth.service';
 import { TauriDeepLinkAuthService } from '@core/services/tauri-deep-link-auth.service';

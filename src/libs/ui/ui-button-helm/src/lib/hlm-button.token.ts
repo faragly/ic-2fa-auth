@@ -1,9 +1,9 @@
-import { inject, InjectionToken, ValueProvider } from '@angular/core';
+import { InjectionToken, ValueProvider, inject } from '@angular/core';
 import type { ButtonVariants } from './hlm-button.directive';
 
 export interface BrnButtonConfig {
-	size: ButtonVariants['size'];
 	variant: ButtonVariants['variant'];
+	size: ButtonVariants['size'];
 }
 
 const defaultConfig: BrnButtonConfig = {

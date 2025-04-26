@@ -5,25 +5,39 @@
     <div class="flex h-14 items-center px-4">
       <div class="mr-4 hidden md:flex">
         <a class="mr-4 flex items-center gap-2 lg:mr-6" href="/">
-          <hlm-icon name="lucideFingerprint" />
+          <ng-icon hlm name="lucideFingerprint" />
           <span class="hidden font-bold md:inline-block">{{ appName }}</span></a
         >
         <!-- <nav class="flex items-center gap-4 text-sm xl:gap-6">
-          <a class="text-foreground/80 transition-colors hover:text-foreground/80" href="/docs">Docs</a>
+          <a
+            class="text-foreground/80 transition-colors hover:text-foreground/80"
+            href="/docs"
+            >Docs</a
+          >
         </nav> -->
       </div>
-      <div class="flex flex-1 items-center justify-between gap-2 md:justify-end">
+      <div
+        class="flex flex-1 items-center justify-between gap-2 md:justify-end">
         <div class="w-full flex-1 md:w-auto md:flex-none">
-          <input class="w-full sm:pr-12 md:w-80" hlmInput placeholder="Search" type="search" [(ngModel)]="filter" />
+          <input
+            class="w-full sm:pr-12 md:w-80"
+            hlmInput
+            placeholder="Search"
+            type="search"
+            [(ngModel)]="filter" />
         </div>
         <nav class="flex items-center gap-1">
-          <button hlmBtn variant="ghost">
-            <hlm-icon size="sm" name="lucideGithub" />
+          <a
+            hlmBtn
+            target="_blank"
+            variant="ghost"
+            href="https://github.com/faragly/ic-2fa-auth">
+            <ng-icon hlm size="sm" name="lucideGithub" />
             <span class="sr-only">GitHub</span>
-          </button>
+          </a>
           <!-- <button hlmBtn variant="ghost">
-            <hlm-icon class="hidden dark:block" size="sm" name="lucideSun" />
-            <hlm-icon class="dark:hidden" size="sm" name="lucideMoon" />
+            <ng-icon hlm class="hidden dark:block" size="sm" name="lucideSun" />
+            <ng-icon hlm class="dark:hidden" size="sm" name="lucideMoon" />
             <span class="sr-only">Toggle theme</span>
           </button> -->
           <app-user-menu />
@@ -38,8 +52,91 @@
     </div>
     <app-secret-list [filter]="filter()" />
   </main>
-  <footer class="bg-blur-lg grid border-t border-border bg-background/95 px-4 py-4">
-    <img class="h-5 justify-self-end dark:hidden" alt="100% on-chain" src="fully-on-chain-dark.svg" />
-    <img class="hidden h-5 justify-self-end dark:visible" alt="100% on-chain" src="fully-on-chain-white.svg" />
+  <footer
+    class="bg-blur-lg grid border-t border-border bg-background/95 px-4 py-4">
+    <img
+      class="h-5 justify-self-end dark:hidden"
+      alt="100% on-chain"
+      src="fully-on-chain-dark.svg" />
+    <img
+      class="hidden h-5 justify-self-end dark:visible"
+      alt="100% on-chain"
+      src="fully-on-chain-white.svg" />
   </footer>
 </div>
+<!-- <div class="border-b">
+  <div class="flex h-16 items-center px-4">
+    <button
+      class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 w-[200px] justify-between"
+      role="combobox"
+      aria-expanded="false"
+      aria-label="Select a team"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="radix-:r82:"
+      data-state="closed">
+      <span
+        class="relative flex shrink-0 overflow-hidden rounded-full mr-2 h-5 w-5"
+        ><img
+          class="aspect-square h-full w-full grayscale"
+          alt="Alicia Koch"
+          src="https://avatar.vercel.sh/personal.png" /></span
+      >Alicia Koch<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-chevrons-up-down ml-auto opacity-50">
+        <path d="m7 15 5 5 5-5"></path>
+        <path d="m7 9 5-5 5 5"></path>
+      </svg>
+    </button>
+    <nav class="flex items-center space-x-4 lg:space-x-6 mx-6">
+      <a
+        class="text-sm font-medium transition-colors hover:text-primary"
+        href="/examples/dashboard"
+        >Overview</a
+      ><a
+        class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        href="/examples/dashboard"
+        >Customers</a
+      ><a
+        class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        href="/examples/dashboard"
+        >Products</a
+      ><a
+        class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        href="/examples/dashboard"
+        >Settings</a
+      >
+    </nav>
+    <div class="ml-auto flex items-center space-x-4">
+      <div>
+        <input
+          class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:w-[100px] lg:w-[300px]"
+          placeholder="Search..."
+          type="search" />
+      </div>
+      <button
+        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 w-8 rounded-full"
+        type="button"
+        id="radix-:r83:"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        data-state="closed">
+        <span
+          class="relative flex shrink-0 overflow-hidden rounded-full h-8 w-8"
+          ><img
+            class="aspect-square h-full w-full"
+            alt="@shadcn"
+            src="/avatars/01.png"
+        /></span>
+      </button>
+    </div>
+  </div>
+</div> -->

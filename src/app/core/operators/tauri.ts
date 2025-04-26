@@ -7,7 +7,9 @@ type Urls = Parameters<Parameters<typeof onOpenUrl>[0]>[0];
 export function onOpenUrlObservable() {
   return new Observable<Urls>((subscriber) => {
     let unlisten: UnlistenFn | null = null;
-    const subscription = from(onOpenUrl((urls) => subscriber.next(urls))).subscribe({
+    const subscription = from(
+      onOpenUrl((urls) => subscriber.next(urls)),
+    ).subscribe({
       error: (err) => subscriber.error(err),
       next: (unlistenFn) => {
         unlisten = unlistenFn;
