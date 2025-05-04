@@ -14,7 +14,9 @@
       "identifier": "opener:allow-open-url",
       "allow": [
         { "url": "https://bd3sg-teaaa-aaaaa-qaaba-cai.localhost/*" },
-        { "url": "https://mphmm-iqaaa-aaaap-anwyq-cai.icp0.io/*" }
+        { "url": "https://mphmm-iqaaa-aaaap-anwyq-cai.icp0.io/*" },
+        { "url": "https://github.com/*" },
+        { "url": "https://internetcomputer.org/" }
       ]
     },
     "deep-link:default"

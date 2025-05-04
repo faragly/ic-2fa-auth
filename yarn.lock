@@ -6484,11 +6484,6 @@ detective-typescript@^11.1.0:
     node-source-walk "^6.0.2"
     typescript "^5.4.4"
 
-dexie@^4.0.11:
-  version "4.0.11"
-  resolved "https://registry.npmjs.org/dexie/-/dexie-4.0.11.tgz"
-  integrity sha512-SOKO002EqlvBYYKQSew3iymBoN2EQ4BDw/3yprjh7kAfFzjBYkaMNa/pZvcA7HSWlcKSQb9XhPe3wKyQ0x4A8A==
-
 diff-sequences@^29.6.3:
   version "29.6.3"
   resolved "https://registry.npmjs.org/diff-sequences/-/diff-sequences-29.6.3.tgz"

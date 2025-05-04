@@ -33,7 +33,6 @@ import {
   HlmMenuComponent,
   HlmMenuItemDirective,
   HlmMenuItemIconDirective,
-  HlmMenuSeparatorComponent,
 } from '@spartan-ng/ui-menu-helm';
 import {
   HlmProgressDirective,
@@ -91,7 +90,6 @@ interface Secret {
     HlmMutedDirective,
     HlmMenuComponent,
     HlmMenuItemDirective,
-    HlmMenuSeparatorComponent,
     HlmMenuItemIconDirective,
     BrnMenuTriggerDirective,
     CopyToClipboardComponent,
